@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description = 'Building useful software, tools, and digital solutions.';
+---
+
+<BaseLayout title="QNR Labs" description={description}>
+  <main>
+    <h1>
+      <picture>
+        <source srcset="/brand/logo-on-dark.svg" media="(prefers-color-scheme: dark)" />
+        <img src="/brand/logo.svg" alt="QNR Labs" width="280" height="64" />
+      </picture>
+    </h1>
+    <p>{description}</p>
+  </main>
+</BaseLayout>

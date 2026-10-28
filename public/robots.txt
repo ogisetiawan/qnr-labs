@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qnr.my.id/sitemap-index.xml

@@ -1,0 +1,26 @@
+{
+  "name": "qnr-labs",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=26 <27",
+    "pnpm": ">=11"
+  },
+  "packageManager": "pnpm@11.24.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}
