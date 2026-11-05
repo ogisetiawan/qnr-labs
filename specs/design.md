@@ -13,7 +13,7 @@ Family speaks in a warm parchment-and-marker language: a cream canvas (#fbfaf9) 
 |------|-------|-------|------|
 | Cream Canvas | `#FFFCF4` | `--color-cream-canvas` | Page background, nav surface — warm ivory paper |
 | Stone Surface | `#EFE4D0` | `--color-stone-surface` | Section bands, inset border tone — one warm step darker than the ivory canvas |
-| Ink Black | `#1C140E` | `--color-ink-black` | Headings and text on the orange accent — warm near-black |
+| Ink Black | `#292D32` | `--color-ink-black` | Headings and text on the orange accent — warm near-black |
 | Heading Charcoal | `#2E241C` | `--color-heading-charcoal` | Primary text, nav text — warm charcoal |
 | Body Brown | `#4A3C32` | `--color-body-brown` | Body copy — same warm hue as the orange, darkened for WCAG AA |
 | Muted | `#6B5648` | `--color-muted-gray` | Helper text, tertiary labels — warm, still AA on the canvas |
@@ -225,7 +225,7 @@ The signature border technique: 1px inset box-shadow in #f2f0ed creates an inter
 | 1 | Stone | `#EFE4D0` | Inset border tone, section bands |
 | 2 | Sand | `#F6EFE0` | Secondary pill, a warm step between canvas and stone |
 | 3 | Pure White | `#ffffff` | Feature cards — the hairline registers against white |
-| 4 | Dark Surface | `#1C140E` | Text on the orange accent, near-black warm ink |
+| 4 | Dark Surface | `#292D32` | Text on the orange accent, near-black warm ink |
 | 5 | Full Black | `#000000` | Dark feature card (Send/Swap stack), shadow base — strongest tonal shift available |
 
 ## Elevation
@@ -248,9 +248,9 @@ Quick Color Reference:
 - text: #2E241C (heading), #4A3C32 (body), #6B5648 (muted)
 - background: #FFFCF4 (canvas), #EFE4D0 (stone band)
 - border: inset 1px #EFE4D0
-- accent fill: #FF6115 with text #1C140E (the bright orange fails AA as text on the canvas)
+- accent fill: #FF6115 with text #292D32 (the bright orange fails AA as text on the canvas)
 - accent text: #9A3412
-- ink: #1C140E
+- ink: #292D32
 
 3-5 Example Component Prompts:
 1. Create a Primary Action Button: #121212 background, #fbfaf9 text, 9999px radius, compact pill padding. Use this filled treatment for the main CTA.
@@ -280,7 +280,7 @@ Quick Color Reference:
   /* Colors */
   --color-cream-canvas: #FFFCF4;
   --color-stone-surface: #EFE4D0;
-  --color-ink-black: #1C140E;
+  --color-ink-black: #292D32;
   --color-heading-charcoal: #2E241C;
   --color-body-brown: #4A3C32;
   --color-muted-gray: #6B5648;
@@ -389,7 +389,7 @@ Quick Color Reference:
   --surface-stone: #EFE4D0;
   --surface-sand: #F6EFE0;
   --surface-pure-white: #ffffff;
-  --surface-dark-surface: #1C140E;
+  --surface-dark-surface: #292D32;
   --surface-full-black: #000000;
 }
 ```
@@ -401,7 +401,7 @@ Quick Color Reference:
   /* Colors */
   --color-cream-canvas: #FFFCF4;
   --color-stone-surface: #EFE4D0;
-  --color-ink-black: #1C140E;
+  --color-ink-black: #292D32;
   --color-heading-charcoal: #2E241C;
   --color-body-brown: #4A3C32;
   --color-muted-gray: #6B5648;
