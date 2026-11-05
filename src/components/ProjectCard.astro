@@ -1,0 +1,121 @@
+---
+interface Props {
+  title: string;
+  category: string;
+  status: string;
+  summary: string;
+  highlight: string;
+  install: string;
+  date: string;
+}
+
+const { title, category, status, summary, highlight, install, date } = Astro.props;
+---
+
+<article class="card">
+  <div class="shot" role="img" aria-label="[TBD] Screenshot">
+    <span>[TBD] Screenshot</span>
+  </div>
+  <p class="meta">
+    <span>{category}</span>
+    <span class="status">{status}</span>
+  </p>
+  <h3>{title}</h3>
+  <p class="summary">{summary}</p>
+  <p class="highlight">{highlight}</p>
+  <dl class="facts">
+    <div>
+      <dt>Install</dt>
+      <dd>{install}</dd>
+    </div>
+    <div>
+      <dt>Release date</dt>
+      <dd>{date}</dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .card {
+    background: var(--surface-pure-white);
+    border-radius: var(--radius-cards);
+    padding: var(--card-padding);
+    box-shadow: inset 0 0 0 1px var(--color-stone-surface);
+  }
+
+  .shot {
+    display: grid;
+    place-items: center;
+    min-height: 220px;
+    margin-bottom: 24px;
+    background: var(--color-cream-canvas);
+    border-radius: var(--radius-cards);
+    box-shadow: inset 0 0 0 1px var(--color-stone-surface);
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin: 0 0 12px;
+    color: var(--color-body-brown);
+    font-size: var(--text-micro);
+    line-height: var(--leading-micro);
+  }
+
+  .status {
+    padding: 2px 10px;
+    border-radius: var(--radius-pills);
+    background: var(--color-stone-surface);
+    color: var(--color-heading-charcoal);
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    color: var(--color-heading-charcoal);
+    font-size: var(--text-heading);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .summary,
+  .highlight,
+  .facts {
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  .summary,
+  .highlight {
+    margin: 0 0 12px;
+  }
+
+  .facts {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0 0;
+  }
+
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 12px;
+    box-shadow: inset 0 1px 0 var(--color-stone-surface);
+  }
+
+  .facts dt {
+    color: var(--color-heading-charcoal);
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+</style>

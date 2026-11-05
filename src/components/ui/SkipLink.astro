@@ -1,0 +1,29 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href = '#content' } = Astro.props;
+---
+
+<a class="skip" href={href}>
+  <slot>Skip to content</slot>
+</a>
+
+<style>
+  .skip {
+    position: absolute;
+    left: 16px;
+    top: 8px;
+    transform: translateY(-140%);
+    background: var(--color-ink-black);
+    color: var(--color-cream-canvas);
+    padding: 8px 12px;
+    border-radius: var(--radius-buttons);
+    z-index: 20;
+  }
+
+  .skip:focus {
+    transform: none;
+  }
+</style>

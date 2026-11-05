@@ -1,0 +1,60 @@
+---
+import Container from './ui/Container.astro';
+
+interface FooterLink {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  year?: number;
+  links?: FooterLink[];
+}
+
+const {
+  year = new Date().getFullYear(),
+  links = [{ label: 'GitHub [TBD]' }, { label: 'Email [TBD]' }],
+} = Astro.props;
+---
+
+<footer id="contact" class="site-footer">
+  <Container class="footer-grid">
+    <p>© {year} QNR Labs</p>
+    <ul>
+      {
+        links.map((link) => (
+          <li>{link.href ? <a href={link.href}>{link.label}</a> : link.label}</li>
+        ))
+      }
+    </ul>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: 32px 40px;
+    scroll-margin-top: 76px;
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+
+  .footer-grid p,
+  .footer-grid ul {
+    margin: 0;
+  }
+
+  .footer-grid ul {
+    display: flex;
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+  }
+</style>

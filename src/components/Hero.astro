@@ -1,0 +1,94 @@
+---
+import Pill from './ui/Pill.astro';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  lede?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  title,
+  eyebrow = 'Independent Digital Product Studio',
+  lede = 'An independent, founder-led studio. Released work is listed on this page.',
+  primaryHref = '#work',
+  primaryLabel = 'Explore work',
+  secondaryHref = '#contact',
+  secondaryLabel = 'Contact',
+} = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1 id="hero-title" class="display">{title}</h1>
+  <p class="lede">{lede}</p>
+  <div class="hero-actions">
+    <Pill href={primaryHref}>{primaryLabel}</Pill>
+    <Pill href={secondaryHref} variant="sand">{secondaryLabel}</Pill>
+  </div>
+</section>
+
+<style>
+  .hero {
+    width: min(100% - 32px, var(--page-max-width));
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-block: 80px 96px;
+  }
+
+  .eyebrow {
+    margin: 0 0 20px;
+    color: var(--color-body-brown);
+    font-size: var(--text-micro);
+    line-height: var(--leading-micro);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    margin: 0;
+    max-width: 16ch;
+    color: var(--color-ink-black);
+    font-family: var(--font-inter);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-heading-lg);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
+  }
+
+  .lede {
+    max-width: 34rem;
+    margin: 20px 0 32px;
+    color: var(--color-body-brown);
+    font-size: var(--text-subheading);
+    line-height: var(--leading-subheading);
+    letter-spacing: var(--tracking-subheading);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      padding-block: 120px;
+    }
+
+    .display {
+      font-size: var(--text-display);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+    }
+  }
+</style>

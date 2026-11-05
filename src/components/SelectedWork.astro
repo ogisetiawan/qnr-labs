@@ -1,0 +1,75 @@
+---
+import Container from './ui/Container.astro';
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  title: string;
+  category: string;
+  status: string;
+  summary: string;
+  highlight: string;
+  install: string;
+  date: string;
+}
+
+interface Props {
+  projects: Project[];
+  title?: string;
+  id?: string;
+}
+
+const { projects, title = 'Selected work', id = 'work' } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="section" aria-labelledby={titleId}>
+  <Container>
+    <h2 id={titleId}>{title}</h2>
+    <ul class="work-list">
+      {
+        projects.map((project) => (
+          <li>
+            <ProjectCard {...project} />
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding-block: 80px;
+    background: var(--color-stone-surface);
+    scroll-margin-top: 76px;
+  }
+
+  h2 {
+    margin: 0 0 36px;
+    color: var(--color-ink-black);
+    text-align: center;
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+  }
+
+  .work-list {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .work-list li {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  @media (min-width: 900px) {
+    .section {
+      padding-block: 104px;
+    }
+  }
+</style>
