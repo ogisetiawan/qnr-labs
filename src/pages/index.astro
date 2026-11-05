@@ -2,16 +2,395 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const description = 'Building useful software, tools, and digital solutions.';
+
+const work = [
+  {
+    title: 'Account Switcher',
+    category: 'Extension',
+    status: 'Released',
+    summary: '[TBD — short description]',
+    highlight: '100+ installs',
+    install: '[TBD]',
+    date: '[TBD]',
+  },
+];
+
+const year = new Date().getFullYear();
 ---
 
 <BaseLayout title="QNR Labs" description={description}>
-  <main>
-    <h1>
-      <picture>
-        <source srcset="/brand/logo-on-dark.svg" media="(prefers-color-scheme: dark)" />
-        <img src="/brand/logo.svg" alt="QNR Labs" width="280" height="64" />
-      </picture>
-    </h1>
-    <p>{description}</p>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="/">
+        <img src="/brand/logo.svg" alt="QNR Labs" width="148" height="34" />
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="actions">
+        <a class="pill" href="#work">Explore work</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <p class="eyebrow">Independent Digital Product Studio</p>
+      <h1 id="hero-title" class="display">{description}</h1>
+      <p class="lede">An independent, founder-led studio. Released work is listed on this page.</p>
+      <div class="hero-actions">
+        <a class="pill" href="#work">Explore work</a>
+        <a class="pill pill-sand" href="#contact">Contact</a>
+      </div>
+    </section>
+
+    <section id="work" class="section" aria-labelledby="work-title">
+      <div class="wrap">
+        <h2 id="work-title">Selected work</h2>
+        <ul class="work-list">
+          {
+            work.map((project) => (
+              <li>
+                <article class="card">
+                  <div class="shot" role="img" aria-label="[TBD] Screenshot">
+                    <span>[TBD] Screenshot</span>
+                  </div>
+                  <p class="meta">
+                    <span>{project.category}</span>
+                    <span class="status">{project.status}</span>
+                  </p>
+                  <h3>{project.title}</h3>
+                  <p class="summary">{project.summary}</p>
+                  <p class="highlight">{project.highlight}</p>
+                  <dl class="facts">
+                    <div>
+                      <dt>Install</dt>
+                      <dd>{project.install}</dd>
+                    </div>
+                    <div>
+                      <dt>Release date</dt>
+                      <dd>{project.date}</dd>
+                    </div>
+                  </dl>
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
   </main>
+
+  <footer id="contact" class="site-footer">
+    <div class="wrap footer-grid">
+      <p>© {year} QNR Labs</p>
+      <ul>
+        <li>GitHub [TBD]</li>
+        <li>Email [TBD]</li>
+      </ul>
+    </div>
+  </footer>
 </BaseLayout>
+
+<style>
+  .skip {
+    position: absolute;
+    left: 16px;
+    top: 8px;
+    transform: translateY(-140%);
+    background: var(--color-ink-black);
+    color: var(--color-cream-canvas);
+    padding: 8px 12px;
+    border-radius: var(--radius-buttons);
+    z-index: 20;
+  }
+
+  .skip:focus {
+    transform: none;
+  }
+
+  .wrap {
+    width: min(100% - 32px, var(--page-max-width));
+    margin-inline: auto;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--color-cream-canvas);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 76px;
+  }
+
+  .brand {
+    display: flex;
+  }
+
+  .brand img {
+    display: block;
+    width: 132px;
+    height: auto;
+  }
+
+  .nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav a {
+    color: var(--color-heading-charcoal);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 8px 12px;
+    border-radius: var(--radius-buttons);
+  }
+
+  .nav a:hover {
+    background: var(--color-stone-surface);
+  }
+
+  .actions {
+    display: none;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-ink-black);
+    color: var(--color-cream-canvas);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    line-height: 20px;
+    letter-spacing: -0.009em;
+    padding: 10px 16px;
+    border-radius: var(--radius-buttons);
+  }
+
+  .pill-sand {
+    background: var(--surface-sand);
+    color: var(--color-ink-black);
+    box-shadow: inset 0 0 0 1px var(--color-stone-surface);
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-block: 80px 96px;
+  }
+
+  .eyebrow {
+    margin: 0 0 20px;
+    color: var(--color-body-brown);
+    font-size: var(--text-micro);
+    line-height: var(--leading-micro);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    margin: 0;
+    max-width: 16ch;
+    color: var(--color-ink-black);
+    font-family: var(--font-inter);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-heading-lg);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
+  }
+
+  .lede {
+    max-width: 34rem;
+    margin: 20px 0 32px;
+    color: var(--color-body-brown);
+    font-size: var(--text-subheading);
+    line-height: var(--leading-subheading);
+    letter-spacing: var(--tracking-subheading);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .section {
+    padding-block: 80px;
+    background: var(--color-stone-surface);
+    scroll-margin-top: 76px;
+  }
+
+  h2 {
+    margin: 0 0 36px;
+    color: var(--color-ink-black);
+    text-align: center;
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+  }
+
+  .work-list {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .work-list li {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .card {
+    background: var(--surface-pure-white);
+    border-radius: var(--radius-cards);
+    padding: var(--card-padding);
+    box-shadow: inset 0 0 0 1px var(--color-stone-surface);
+  }
+
+  .shot {
+    display: grid;
+    place-items: center;
+    min-height: 220px;
+    margin-bottom: 24px;
+    background: var(--color-cream-canvas);
+    border-radius: var(--radius-cards);
+    box-shadow: inset 0 0 0 1px var(--color-stone-surface);
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin: 0 0 12px;
+    color: var(--color-body-brown);
+    font-size: var(--text-micro);
+    line-height: var(--leading-micro);
+  }
+
+  .status {
+    padding: 2px 10px;
+    border-radius: var(--radius-pills);
+    background: var(--color-stone-surface);
+    color: var(--color-heading-charcoal);
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    color: var(--color-heading-charcoal);
+    font-size: var(--text-heading);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .summary,
+  .highlight,
+  .facts {
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  .summary,
+  .highlight {
+    margin: 0 0 12px;
+  }
+
+  .facts {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0 0;
+  }
+
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 12px;
+    box-shadow: inset 0 1px 0 var(--color-stone-surface);
+  }
+
+  .facts dt {
+    color: var(--color-heading-charcoal);
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+
+  .site-footer {
+    padding-block: 32px 40px;
+    scroll-margin-top: 76px;
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+
+  .footer-grid p,
+  .footer-grid ul {
+    margin: 0;
+  }
+
+  .footer-grid ul {
+    display: flex;
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 900px) {
+    .bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .hero {
+      padding-block: 120px;
+    }
+
+    .display {
+      font-size: var(--text-display);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+    }
+
+    .section {
+      padding-block: 104px;
+    }
+  }
+</style>

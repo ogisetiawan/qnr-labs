@@ -1,29 +1,142 @@
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
 
-:root {
-  color-scheme: light;
-  --bg: #f7f6f3;
-  --fg: #0f172a;
+/* Inter variable, Latin. SIL OFL 1.1. Theme weights: 400, 500, 600. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #0f172a;
-    --fg: #f8fafc;
-  }
+/* [TBD] Display face "Family", weight 500. No licensed file is in the repo. */
+
+@theme {
+  /* Colors */
+  --color-cream-canvas: #fbfaf9;
+  --color-stone-surface: #f2f0ed;
+  --color-ink-black: #1C140E;
+  --color-heading-charcoal: #343433;
+  --color-body-brown: #474645;
+  --color-muted-gray: #7e7e7d;
+  --color-stone-border: #e5d5c3;
+  --color-link-blue: #0086fc;
+  --color-sky-blue: #64c6ff;
+  --color-alt-blue: #00b2ff;
+  --color-grass-green: #00c978;
+  --color-mint: #00ca48;
+  --color-ember-orange: #ff3e00;
+  --color-sun-yellow: #ffcd6c;
+  --color-gold: #d48f00;
+  --color-honey: #ffbb26;
+  --color-coral-pink: #ff58ae;
+  --color-plum-violet: #9f4fff;
+  --color-alert-red: #ff2b3a;
+
+  /* Typography */
+  --font-family: "Family", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inter: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Typography — Scale */
+  --text-micro: 12px;
+  --leading-micro: 19px;
+  --tracking-micro: -0.01px;
+  --text-caption: 15px;
+  --leading-caption: 22px;
+  --tracking-caption: -0.14px;
+  --text-body: 17px;
+  --leading-body: 26px;
+  --tracking-body: -0.22px;
+  --text-subheading: 19px;
+  --leading-subheading: 27px;
+  --tracking-subheading: -0.3px;
+  --text-heading: 23px;
+  --leading-heading: 25px;
+  --tracking-heading: -0.44px;
+  --text-heading-lg: 44px;
+  --leading-heading-lg: 53px;
+  --tracking-heading-lg: -0.88px;
+  --text-display: 68px;
+  --leading-display: 75px;
+  --tracking-display: -2.1px;
+
+  /* Spacing */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-36: 36px;
+  --spacing-48: 48px;
+  --spacing-60: 60px;
+  --spacing-76: 76px;
+  --spacing-80: 80px;
+  --spacing-92: 92px;
+  --spacing-96: 96px;
+  --spacing-104: 104px;
+
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-2xl: 17px;
+  --radius-3xl: 24px;
+  --radius-3xl-2: 32px;
+  --radius-3xl-3: 40px;
+  --radius-full: 72px;
+  --radius-full-2: 9999px;
+
+  /* Shadows */
+  --shadow-subtle: color(display-p3 0.94902 0.941176 0.929412) 0px 0px 0px 1px inset;
+  --shadow-subtle-2: color(display-p3 0.94902 0.941176 0.929412) 0px 0px 0px 0px inset;
+  --shadow-subtle-3: rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;
+  --shadow-lg: rgba(0, 0, 0, 0.15) 0px 0px 24px 0px;
+  --shadow-sm: rgba(0, 0, 0, 0.04) 0px 1px 6px 0px, rgba(0, 0, 0, 0.05) 0px 0px 24px 0px;
+}
+
+:root {
+  color-scheme: light;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --spacing-unit: 4px;
+  --page-max-width: 1200px;
+  --card-padding: 32px;
+
+  --radius-nav: 10px;
+  --radius-cards: 10px;
+  --radius-icons: 40px;
+  --radius-pills: 9999px;
+  --radius-small: 2px;
+  --radius-badges: 6px;
+  --radius-buttons: 32px;
+  --radius-illustration: 72px;
+
+  --surface-canvas: #fbfaf9;
+  --surface-stone: #f2f0ed;
+  --surface-sand: #f6f4ef;
+  --surface-pure-white: #ffffff;
+  --surface-dark-surface: #121212;
+  --surface-full-black: #000000;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: system-ui, sans-serif;
+  background: var(--color-cream-canvas);
+  color: var(--color-body-brown);
+  font-family: var(--font-inter);
+  font-weight: var(--font-weight-regular);
 }
 
 :focus-visible {
-  outline: 2px solid #ff5e00;
+  outline: 2px solid var(--color-ember-orange);
   outline-offset: 3px;
 }
