@@ -1,0 +1,393 @@
+---
+interface Props {
+  side: 'left' | 'right';
+  class?: string;
+}
+
+const { side, class: className } = Astro.props;
+
+const sparkle = 'M0 -14C2 -4 4 -2 14 0C4 2 2 4 0 14C-2 4 -4 2 -14 0C-4 -2 -2 -4 0 -14Z';
+---
+
+<svg
+  class:list={['hero-art', `hero-art-${side}`, className]}
+  viewBox="0 0 340 440"
+  width="340"
+  height="440"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    side === 'left' ? (
+      <>
+        <g transform="translate(86 70)">
+          <g class="pop" style="--i: 0">
+            <g class="bob" style="--d: 6.4s">
+              <circle r="34" class="f-sun ln" />
+              <path d="M-8 -12L-20 0L-8 12M8 -12L20 0L8 12M4 -14L-4 14" class="ln-bold" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 1">
+            <g class="bob" style="--d: 7.2s">
+              <path
+                d="M150 34C140 62 176 72 168 42C162 20 200 18 196 52"
+                class="s-grass"
+              />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(240 44)">
+          <g class="pop" style="--i: 2">
+            <path d={sparkle} class="f-sun twinkle" style="--d: 3.4s" />
+          </g>
+        </g>
+
+        <g transform="translate(286 104)">
+          <g class="pop" style="--i: 3">
+            <g class="bob" style="--d: 5.6s">
+              <path d="M0 0V36L10 27L17 42L25 38L18 24H31Z" class="f-blue ln" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 4">
+            <g class="bob" style="--d: 8s">
+              <path d="M110 268C108 298 96 316 84 328" class="s-ink" />
+              <path d="M172 268C176 298 188 314 202 322" class="s-ink" />
+              <path d="M238 200C260 196 274 206 286 220" class="s-ink" />
+              <ellipse cx="80" cy="333" rx="13" ry="9" class="f-sun ln" />
+              <ellipse cx="207" cy="326" rx="13" ry="9" class="f-sun ln" />
+              <circle cx="291" cy="225" r="9" class="f-sun ln" />
+              <rect x="40" y="118" width="200" height="152" rx="28" class="f-sky ln" />
+              <path d="M40 160H240" class="ln" />
+              <circle cx="70" cy="139" r="6" class="f-white ln" />
+              <circle cx="90" cy="139" r="6" class="f-white ln" />
+              <circle cx="110" cy="139" r="6" class="f-white ln" />
+              <ellipse cx="120" cy="208" rx="7" ry="10" class="f-ink" />
+              <ellipse cx="160" cy="208" rx="7" ry="10" class="f-ink" />
+              <path d="M124 232Q140 246 156 232" class="ln-bold" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(310 262)">
+          <g class="pop" style="--i: 5">
+            <g class="bob" style="--d: 6.8s">
+              <circle r="9" class="f-ember" />
+              <circle cy="34" r="9" class="f-ember" />
+              <path d="M6 38Q6 54 -8 62" class="s-ember" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(250 372)">
+          <g class="pop" style="--i: 6">
+            <g class="spin">
+              <circle r="26" class="gear-teeth" />
+              <circle r="21" class="f-stone" />
+              <circle r="8" class="f-canvas" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(130 378)">
+          <g class="pop" style="--i: 7">
+            <path d={sparkle} class="f-sun twinkle" style="--d: 4.2s; scale: 0.7" />
+          </g>
+        </g>
+
+        <g class="pop" style="--i: 8">
+          <circle cx="30" cy="392" r="10" class="f-sky" />
+          <circle cx="162" cy="420" r="7" class="f-grass" />
+          <circle cx="24" cy="30" r="6" class="f-coral" />
+          <circle cx="22" cy="178" r="6" class="f-sun" />
+        </g>
+      </>
+    ) : (
+      <>
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 0">
+            <g class="bob" style="--d: 7s">
+              <rect x="66" y="26" width="118" height="84" rx="16" class="f-white ln" />
+              <path d="M66 50H184" class="ln" />
+              <circle cx="84" cy="38" r="4" class="f-coral" />
+              <circle cx="98" cy="38" r="4" class="f-sun" />
+              <circle cx="112" cy="38" r="4" class="f-grass" />
+              <path d="M88 66L100 77L88 88" class="s-ember-thin" />
+              <path d="M108 90H130" class="ln-bold" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(272 70)">
+          <g class="pop" style="--i: 1">
+            <g class="bob" style="--d: 5.8s">
+              <circle r="27" class="f-stone-surface" />
+              <path d="M-12 0L-3 9L13 -9" class="s-grass" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(40 128)">
+          <g class="pop" style="--i: 2">
+            <path d={sparkle} class="f-sun twinkle" style="--d: 3.8s" />
+          </g>
+        </g>
+
+        <g transform="translate(290 148)">
+          <g class="pop" style="--i: 3">
+            <g class="bob" style="--d: 6.2s">
+              <path d="M0 0L-16 28H-2L-10 54L18 18H4L12 0Z" class="f-honey ln" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 4">
+            <g class="bob" style="--d: 8.4s">
+              <path d="M140 290C138 312 130 324 120 332" class="s-ink" />
+              <path d="M196 290C198 312 208 322 222 328" class="s-ink" />
+              <ellipse cx="116" cy="337" rx="12" ry="8" class="f-ember ln" />
+              <ellipse cx="226" cy="331" rx="12" ry="8" class="f-ember ln" />
+              <path
+                d="M100 170H150A18 18 0 1 1 186 170H230V220A18 18 0 1 1 230 256V290H100Z"
+                class="f-grass ln"
+              />
+              <path d="M138 232Q146 224 154 232M178 232Q186 224 194 232" class="ln-bold" />
+              <path d="M152 250Q166 262 180 250" class="ln-bold" />
+              <circle cx="130" cy="248" r="6" class="f-coral cheek" />
+              <circle cx="202" cy="248" r="6" class="f-coral cheek" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 5">
+            <g class="bob" style="--d: 6.6s">
+              <path d="M54 262L24 290L54 318M28 290H86" class="s-green-bold" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 6">
+            <g class="bob" style="--d: 7.6s">
+              <path
+                d="M42 176C32 176 32 184 32 192C32 198 28 200 24 200C28 200 32 202 32 208C32 216 32 224 42 224"
+                class="s-coral"
+              />
+              <path
+                d="M64 176C74 176 74 184 74 192C74 198 78 200 82 200C78 200 74 202 74 208C74 216 74 224 64 224"
+                class="s-coral"
+              />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(0 0)">
+          <g class="pop" style="--i: 7">
+            <g class="toggle">
+              <rect x="196" y="370" width="76" height="40" rx="20" class="f-mint ln" />
+              <circle cx="252" cy="390" r="14" class="f-white ln knob" />
+            </g>
+          </g>
+        </g>
+
+        <g transform="translate(312 330)">
+          <g class="pop" style="--i: 8">
+            <path d={sparkle} class="f-sun twinkle" style="--d: 4.6s; scale: 0.7" />
+          </g>
+        </g>
+
+        <g class="pop" style="--i: 9">
+          <circle cx="20" cy="62" r="8" class="f-sky" />
+          <circle cx="314" cy="412" r="11" class="f-sky" />
+          <circle cx="134" cy="420" r="7" class="f-grass" />
+          <circle cx="196" cy="128" r="6" class="f-sun" />
+        </g>
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .hero-art {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ln {
+    stroke: var(--color-heading-charcoal);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+  }
+
+  .ln-bold {
+    fill: none;
+    stroke: var(--color-heading-charcoal);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .s-ink {
+    fill: none;
+    stroke: var(--color-heading-charcoal);
+    stroke-width: 8;
+    stroke-linecap: round;
+  }
+
+  .s-grass {
+    fill: none;
+    stroke: var(--color-grass-green);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .s-green-bold {
+    fill: none;
+    stroke: var(--color-grass-green);
+    stroke-width: 11;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .s-coral {
+    fill: none;
+    stroke: var(--color-coral-pink);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .s-ember {
+    fill: none;
+    stroke: var(--color-ember-orange);
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+
+  .s-ember-thin {
+    fill: none;
+    stroke: var(--color-ember-orange);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .f-sky { fill: var(--color-sky-blue); }
+  .f-blue { fill: var(--color-link-blue); }
+  .f-sun { fill: var(--color-sun-yellow); }
+  .f-honey { fill: var(--color-honey); }
+  .f-grass { fill: var(--color-grass-green); }
+  .f-mint { fill: var(--color-mint); }
+  .f-ember { fill: var(--color-ember-orange); }
+  .f-coral { fill: var(--color-coral-pink); }
+  .f-stone { fill: var(--color-stone-border); }
+  .f-stone-surface { fill: var(--color-stone-surface); }
+  .f-canvas { fill: var(--color-cream-canvas); }
+  .f-white { fill: var(--surface-pure-white); }
+  .f-ink { fill: var(--color-heading-charcoal); }
+
+  .cheek {
+    opacity: 0.55;
+  }
+
+  .gear-teeth {
+    fill: none;
+    stroke: var(--color-stone-border);
+    stroke-width: 12;
+    stroke-dasharray: 10 10.42;
+  }
+
+  .pop,
+  .bob,
+  .spin,
+  .twinkle,
+  .knob {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pop {
+      animation: hero-pop 700ms var(--ease-out-expo) both;
+      animation-delay: calc(120ms + var(--i, 0) * 60ms);
+    }
+
+    .bob {
+      animation: hero-bob var(--d, 6s) cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+      animation-delay: calc(var(--i, 0) * -900ms);
+    }
+
+    .twinkle {
+      animation: hero-twinkle var(--d, 4s) cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+    }
+
+    .spin {
+      animation: hero-spin 24s linear infinite;
+    }
+
+    .knob {
+      animation: hero-toggle 4.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+  }
+
+  @keyframes hero-pop {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.86);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes hero-bob {
+    from {
+      transform: translateY(-5px) rotate(-1.5deg);
+    }
+    to {
+      transform: translateY(6px) rotate(1.5deg);
+    }
+  }
+
+  @keyframes hero-twinkle {
+    from {
+      transform: rotate(-12deg) scale(0.82);
+    }
+    to {
+      transform: rotate(12deg) scale(1.08);
+    }
+  }
+
+  @keyframes hero-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes hero-toggle {
+    0%,
+    40% {
+      transform: translateX(0);
+    }
+    50%,
+    90% {
+      transform: translateX(-36px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>

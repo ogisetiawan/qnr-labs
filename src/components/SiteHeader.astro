@@ -23,6 +23,7 @@ const {
 } = Astro.props;
 ---
 
+<div class="scroll-sentinel" aria-hidden="true"></div>
 <header class="site-header">
   <Container class="bar">
     <a class="brand" href="/">
@@ -39,14 +40,65 @@ const {
       <Pill href={ctaHref}>{ctaLabel}</Pill>
     </div>
   </Container>
+  <div class="scroll-edge" aria-hidden="true"></div>
 </header>
 
+<script>
+  const header = document.querySelector('.site-header');
+  const sentinel = header?.previousElementSibling;
+  if (
+    header instanceof HTMLElement &&
+    sentinel instanceof HTMLElement &&
+    !CSS.supports('container-type', 'scroll-state')
+  ) {
+    new IntersectionObserver(([entry]) => {
+      header.classList.toggle('is-stuck', !entry.isIntersecting);
+    }).observe(sentinel);
+  }
+</script>
+
 <style>
+  .scroll-sentinel {
+    height: 1px;
+    margin-bottom: -1px;
+    pointer-events: none;
+  }
+
   .site-header {
     position: sticky;
     top: 0;
     z-index: 10;
     background: var(--color-cream-canvas);
+    container-type: scroll-state;
+    container-name: site-header;
+  }
+
+  .scroll-edge {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: var(--color-stone-surface);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @container site-header scroll-state(stuck: top) {
+    .scroll-edge {
+      opacity: 1;
+    }
+  }
+
+  .site-header.is-stuck .scroll-edge {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-edge {
+      transition: none;
+    }
   }
 
   .bar {

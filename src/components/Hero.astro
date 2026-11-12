@@ -1,4 +1,5 @@
 ---
+import HeroArt from './HeroArt.astro';
 import Pill from './ui/Pill.astro';
 
 interface Props {
@@ -23,24 +24,57 @@ const {
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <p class="eyebrow">{eyebrow}</p>
-  <h1 id="hero-title" class="display">{title}</h1>
-  <p class="lede">{lede}</p>
-  <div class="hero-actions">
-    <Pill href={primaryHref}>{primaryLabel}</Pill>
-    <Pill href={secondaryHref} variant="sand">{secondaryLabel}</Pill>
+  <div class="hero-copy">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 id="hero-title" class="display">{title}</h1>
+    <p class="lede">{lede}</p>
+    <div class="hero-actions">
+      <Pill href={primaryHref}>{primaryLabel}</Pill>
+      <Pill href={secondaryHref} variant="sand">{secondaryLabel}</Pill>
+    </div>
   </div>
+  <HeroArt side="left" class="art art-left" />
+  <HeroArt side="right" class="art art-right" />
 </section>
 
 <style>
   .hero {
-    width: min(100% - 32px, var(--page-max-width));
-    margin-inline: auto;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'copy copy'
+      'left right';
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 40px;
+    padding: 64px 16px 72px;
+    overflow: hidden;
+  }
+
+  .hero-copy {
+    grid-area: copy;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding-block: 80px 96px;
+    min-width: 0;
+  }
+
+  .hero :global(.art) {
+    width: 100%;
+    max-width: 210px;
+    min-width: 0;
+  }
+
+  .hero :global(.art-left) {
+    grid-area: left;
+    justify-self: end;
+  }
+
+  .hero :global(.art-right) {
+    grid-area: right;
+    justify-self: start;
   }
 
   .eyebrow {
@@ -54,7 +88,7 @@ const {
 
   .display {
     margin: 0;
-    max-width: 16ch;
+    max-width: 14ch;
     color: var(--color-ink-black);
     font-family: var(--font-inter);
     font-weight: var(--font-weight-medium);
@@ -65,12 +99,13 @@ const {
   }
 
   .lede {
-    max-width: 34rem;
+    max-width: 30rem;
     margin: 20px 0 32px;
     color: var(--color-body-brown);
-    font-size: var(--text-subheading);
-    line-height: var(--leading-subheading);
-    letter-spacing: var(--tracking-subheading);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
   }
 
   .hero-actions {
@@ -80,15 +115,67 @@ const {
     gap: 8px;
   }
 
-  @media (min-width: 900px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-copy > * {
+      animation: hero-rise 700ms var(--ease-out-expo) both;
+    }
+
+    .hero-copy > :nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    .hero-copy > :nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    .hero-copy > :nth-child(4) {
+      animation-delay: 180ms;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
     .hero {
-      padding-block: 120px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 600px) minmax(0, 1fr);
+      grid-template-areas: 'left copy right';
+      column-gap: 24px;
+      padding: 72px 0 88px;
+    }
+
+    .hero :global(.art) {
+      max-width: 340px;
+    }
+
+    .hero :global(.art-left) {
+      justify-self: start;
+      margin-left: -24px;
+    }
+
+    .hero :global(.art-right) {
+      justify-self: end;
+      margin-right: -24px;
     }
 
     .display {
       font-size: var(--text-display);
       line-height: var(--leading-display);
       letter-spacing: var(--tracking-display);
+    }
+
+    .lede {
+      font-size: var(--text-subheading);
+      line-height: var(--leading-subheading);
+      letter-spacing: var(--tracking-subheading);
     }
   }
 </style>
