@@ -1,0 +1,170 @@
+---
+import Container from './ui/Container.astro';
+
+interface Step {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  lede?: string;
+  steps?: Step[];
+}
+
+const {
+  id = 'services',
+  eyebrow = 'Services',
+  title = 'How web work gets built',
+  lede = 'QNR builds as a founder-led studio. Web work starts from a real problem, ships as a small version, and stays clear about what is finished.',
+  steps = [
+    {
+      title: 'Start from the problem',
+      text: 'QNR builds useful software, tools, and pages that solve a real problem.',
+    },
+    {
+      title: 'Ship a small version',
+      text: 'The first version stays small. QNR then learns, improves, and iterates.',
+    },
+    {
+      title: 'Choose technology on purpose',
+      text: 'The stack is chosen for the job, and the result stays lightweight and easy to maintain.',
+    },
+    {
+      title: 'State what is true',
+      text: 'Project status, ownership, and availability are explained plainly.',
+    },
+  ],
+} = Astro.props;
+
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="section" aria-labelledby={titleId}>
+  <Container>
+    <div class="layout">
+      <header class="intro">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id={titleId}>{title}</h2>
+        <p class="lede">{lede}</p>
+      </header>
+      <ol class="steps">
+        {
+          steps.map((step, index) => (
+            <li>
+              <span class="index">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding-block: 80px;
+    scroll-margin-top: 76px;
+  }
+
+  .layout {
+    display: grid;
+    gap: 48px;
+  }
+
+  .intro {
+    max-width: 36rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 12px;
+    color: var(--color-muted-gray);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-caption);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+    max-width: 12ch;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+  }
+
+  .lede {
+    margin: 20px 0 0;
+    max-width: 38ch;
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: 8px 16px;
+    padding-block: 22px;
+    border-top: 1px solid var(--color-stone-border);
+  }
+
+  .steps li:last-child {
+    border-bottom: 1px solid var(--color-stone-border);
+  }
+
+  .index {
+    color: var(--color-muted-gray);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--leading-heading);
+    letter-spacing: 0.04em;
+  }
+
+  h3 {
+    margin: 0;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .steps p {
+    margin: 8px 0 0;
+    max-width: 46ch;
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  @media (min-width: 900px) {
+    .section {
+      padding-block: 104px;
+    }
+
+    .layout {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 80px;
+      align-items: start;
+    }
+  }
+</style>

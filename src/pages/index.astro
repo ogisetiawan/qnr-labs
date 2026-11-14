@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
 import SelectedWork from '@components/SelectedWork.astro';
+import Services from '@components/Services.astro';
 import SiteFooter from '@components/SiteFooter.astro';
 import SiteHeader from '@components/SiteHeader.astro';
 import SkipLink from '@components/ui/SkipLink.astro';
@@ -27,6 +28,7 @@ const work = [
   <main id="content">
     <Hero title={description} />
     <SelectedWork projects={work} />
+    <Services />
   </main>
   <SiteFooter />
 </BaseLayout>

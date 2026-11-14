@@ -15,11 +15,12 @@ interface Props {
 
 const {
   links = [
-    { href: '#work', label: 'Work' },
+    { href: '#labs', label: 'Labs' },
+    { href: '#services', label: 'Services' },
     { href: '#contact', label: 'Contact' },
   ],
-  ctaHref = '#work',
-  ctaLabel = 'Explore work',
+  ctaHref = '#labs',
+  ctaLabel = 'Explore labs',
 } = Astro.props;
 ---
 
@@ -103,9 +104,10 @@ const {
 
   .bar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 8px 16px;
     min-height: 76px;
   }
 
