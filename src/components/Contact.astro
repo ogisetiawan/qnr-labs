@@ -1,0 +1,108 @@
+---
+import Container from './ui/Container.astro';
+
+interface Channel {
+  label: string;
+  value: string;
+  href?: string;
+}
+
+interface Props {
+  id?: string;
+  title?: string;
+  lede?: string;
+  channels?: Channel[];
+}
+
+const {
+  id = 'contact',
+  title = 'Contact',
+  lede = 'Reach QNR Labs through a public channel.',
+  channels = [
+    { label: 'Email', value: '[TBD]' },
+    { label: 'GitHub', value: '[TBD]' },
+  ],
+} = Astro.props;
+
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="section" aria-labelledby={titleId}>
+  <Container>
+    <h2 id={titleId}>{title}</h2>
+    <p class="lede">{lede}</p>
+    <ul>
+      {
+        channels.map((channel) => (
+          <li>
+            <span class="label">{channel.label}</span>
+            {channel.href ? (
+              <a href={channel.href}>{channel.value}</a>
+            ) : (
+              <span>{channel.value}</span>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding-block: 80px;
+    background: var(--color-stone-surface);
+    scroll-margin-top: 76px;
+    text-align: center;
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .lede {
+    margin: 12px auto 0;
+    max-width: 36ch;
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px 48px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
+  }
+
+  li span:last-child,
+  li a {
+    color: var(--color-ink-black);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-body);
+  }
+
+  li a {
+    color: var(--color-link-blue);
+  }
+</style>
