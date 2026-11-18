@@ -1,5 +1,6 @@
 ---
 import Container from './ui/Container.astro';
+import HeroArt from './HeroArt.astro';
 
 interface Channel {
   label: string;
@@ -16,8 +17,8 @@ interface Props {
 
 const {
   id = 'contact',
-  title = 'Contact',
-  lede = 'Reach QNR Labs through a public channel.',
+  title = 'Contact QNR Labs',
+  lede = 'Ask QNR to build something or reach out through a public channel. No contact form on this site.',
   channels = [
     { label: 'Email', value: '[TBD]' },
     { label: 'GitHub', value: '[TBD]' },
@@ -29,80 +30,127 @@ const titleId = `${id}-title`;
 
 <section id={id} class="section" aria-labelledby={titleId}>
   <Container>
-    <h2 id={titleId}>{title}</h2>
-    <p class="lede">{lede}</p>
-    <ul>
-      {
-        channels.map((channel) => (
-          <li>
-            <span class="label">{channel.label}</span>
-            {channel.href ? (
-              <a href={channel.href}>{channel.value}</a>
-            ) : (
-              <span>{channel.value}</span>
-            )}
-          </li>
-        ))
-      }
-    </ul>
+    <div class="layout">
+      <div class="copy">
+        <h2 id={titleId}>{title}</h2>
+        <p class="lede">{lede}</p>
+        <ul>
+          {
+            channels.map((channel) => (
+              <li>
+                {channel.href ? (
+                  <a href={channel.href}>
+                    <span>{channel.label}</span>
+                    <span>{channel.value}</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                ) : (
+                  <span class="channel">
+                    <span>{channel.label}</span>
+                    <span>{channel.value}</span>
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="art">
+        <HeroArt side="left" class="piece" />
+        <HeroArt side="right" class="piece" />
+      </div>
+    </div>
   </Container>
 </section>
 
 <style>
   .section {
     padding-block: 80px;
-    background: var(--color-stone-surface);
-    scroll-margin-top: 76px;
-    text-align: center;
+    scroll-margin-top: 104px;
+  }
+
+  .layout {
+    display: grid;
+    gap: 48px;
+    align-items: center;
   }
 
   h2 {
     margin: 0;
     color: var(--color-ink-black);
-    font-size: var(--text-heading);
+    font-size: var(--text-heading-lg);
     font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading);
-    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
   }
 
   .lede {
-    margin: 12px auto 0;
+    margin: 20px 0 0;
     max-width: 36ch;
     color: var(--color-body-brown);
     font-size: var(--text-body);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
   }
 
   ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 28px 48px;
-    margin: 32px 0 0;
+    display: grid;
+    gap: 12px;
+    margin: 28px 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .label {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--color-body-brown);
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-caption);
-    letter-spacing: var(--tracking-caption);
-  }
-
-  li span:last-child,
-  li a {
-    color: var(--color-ink-black);
+  a,
+  .channel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: var(--text-body);
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
   }
 
-  li a {
+  a {
     color: var(--color-link-blue);
+    text-decoration: none;
+  }
+
+  .channel {
+    color: var(--color-ink-black);
+  }
+
+  .art {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .art :global(.piece) {
+    width: min(42vw, 168px);
+    height: auto;
+  }
+
+  @media (min-width: 900px) {
+    .section {
+      padding-block: 104px;
+    }
+
+    .layout {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 64px;
+    }
+
+    .art {
+      justify-content: flex-end;
+    }
+
+    .art :global(.piece) {
+      width: min(100%, 220px);
+    }
   }
 </style>

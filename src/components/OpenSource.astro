@@ -1,0 +1,76 @@
+---
+import Container from './ui/Container.astro';
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  lede?: string;
+}
+
+const {
+  id = 'open-source',
+  eyebrow = 'Open source',
+  title = 'Selected work, shared on purpose',
+  lede = 'QNR publishes selected projects when a public repository or release is confirmed. Not every product is open source.',
+} = Astro.props;
+
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="section" aria-labelledby={titleId}>
+  <Container>
+    <div class="layout">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id={titleId}>{title}</h2>
+      <p class="lede">{lede}</p>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding-block: 80px;
+    scroll-margin-top: 104px;
+  }
+
+  .layout {
+    max-width: 38rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 12px;
+    color: var(--color-muted-gray);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-caption);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+    max-width: 18ch;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin: 20px 0 0;
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 900px) {
+    .section {
+      padding-block: 104px;
+    }
+  }
+</style>

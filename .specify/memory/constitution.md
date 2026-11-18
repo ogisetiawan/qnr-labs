@@ -1,11 +1,10 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.0 → 1.1.0
-- Bump rationale: Principle I now records the owner-approved purpose in
-  specs/specs.md. The site is an open-source project showcase that starts
-  from personal problems and invites a visitor to ask QNR to build. The
-  honesty rules are unchanged. MINOR because the principle was expanded,
-  not removed.
+- Version change: 1.1.0 → 1.2.0
+- Bump rationale: Principle V and Principle VII now say the owner validates
+  the result. An agent does not check the dev server, take screenshots, or
+  open a browser unless the current request asks for that check. MINOR
+  because the operating rule was expanded.
 - Modified principles:
   - [PRINCIPLE_1_NAME] → I. Product Principles
   - [PRINCIPLE_2_NAME] → II. Product Scope and Boundaries
@@ -116,8 +115,9 @@ filled button. `--color-link-blue` is for an inline link, not a filled button.
 Status color marks status only. `--color-alert-red` is for a destructive or
 error state only.
 
-The `:focus-visible` outline MUST be kept. Layout MUST be checked at 360, 768,
-and 1280. Text contrast MUST meet WCAG AA. Motion, when a requirement needs it,
+The `:focus-visible` outline MUST be kept. Layout MUST be written for 360, 768,
+and 1280. The agent MUST NOT open a browser to check those widths. Text
+contrast MUST meet WCAG AA. Motion, when a requirement needs it,
 MUST use transform and opacity and MUST respect `prefers-reduced-motion`.
 
 `public/brand/` MUST be changed only when the user asks. Login, tweets,
@@ -193,9 +193,13 @@ audit from that skill.
 A completion summary MUST list what changed, every [TBD] left in place, what
 the owner must configure or finish, and known limitations.
 
-Agents MUST NOT run `git commit`, `git push`, `pnpm build`, `pnpm dev`,
-`pnpm exec astro check`, or any deploy unless the user explicitly asks.
-Product-requirement planning files are not a reason to do so.
+The agent does only what the current request asks. The owner validates the
+result. The agent MUST NOT check whether the dev server is running, start or
+stop it, or request localhost. The agent MUST NOT take a screenshot or launch
+Edge, Chrome, or any headless browser. The agent MUST NOT run `git commit`,
+`git push`, `pnpm build`, `pnpm dev`, `pnpm preview`, `pnpm exec astro check`,
+Lighthouse, or any deploy unless the current message explicitly asks for that
+action. Product-requirement planning files are not a reason to do so.
 
 ### VI. Content and Data Management
 
@@ -223,11 +227,12 @@ Copy that is not in `specs/specs.md` MUST NOT be written into content.
 
 ### VII. Quality Assurance and Testing
 
-When a milestone check is requested, `pnpm build` MUST succeed and
-`pnpm exec astro check` MUST pass after type or content-schema changes. The
-spec's quality bar is Lighthouse mobile at or above 95 for Performance,
-Accessibility, Best Practices, and SEO. Pages MUST use semantic HTML, keyboard
-access, a visible focus state, and WCAG AA contrast.
+The owner validates milestones. When the current request asks for a milestone
+check, `pnpm build` MUST succeed and `pnpm exec astro check` MUST pass after
+type or content-schema changes. The spec's quality bar is Lighthouse mobile
+at or above 95 for Performance, Accessibility, Best Practices, and SEO. Pages
+MUST use semantic HTML, keyboard access, a visible focus state, and WCAG AA
+contrast. The agent does not run that check on its own.
 
 The MVP definition of done is the one in `specs/specs.md`: a clean build, the
 home page and the Account Switcher page correct on mobile and desktop in light
@@ -345,4 +350,4 @@ dependency outside the allowed table, and does not create a second product
 specification. Extra complexity MUST be justified by a requirement already in
 the spec. Day-to-day agent guidance remains `AGENTS.md`.
 
-**Version**: 1.1.0 | **Ratified**: 2026-11-14 | **Last Amended**: 2026-11-14
+**Version**: 1.2.0 | **Ratified**: 2026-11-14 | **Last Amended**: 2026-11-15

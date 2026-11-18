@@ -1,35 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
-import SelectedWork from '@components/SelectedWork.astro';
+import Process from '@components/Process.astro';
+import DigitalLabs from '@components/DigitalLabs.astro';
 import Services from '@components/Services.astro';
+import OpenSource from '@components/OpenSource.astro';
 import Contact from '@components/Contact.astro';
 import SiteFooter from '@components/SiteFooter.astro';
 import SiteHeader from '@components/SiteHeader.astro';
 import SkipLink from '@components/ui/SkipLink.astro';
+import { labProjects } from '../data/labs';
 
-const description = 'Building useful software, tools, and digital solutions.';
-
-const work = [
-  {
-    title: 'Account Switcher',
-    category: 'Extension',
-    status: 'Released',
-    summary: '[TBD — short description]',
-    highlight: '100+ installs',
-    install: '[TBD]',
-    date: '[TBD]',
-  },
-];
+const heroTitle = 'Turning real problems into useful digital products.';
+const heroLede =
+  'QNR Labs is an independent digital studio building its own products and developing practical digital solutions for others.';
+const description = heroLede;
 ---
 
 <BaseLayout title="QNR Labs" description={description}>
   <SkipLink />
   <SiteHeader />
   <main id="content">
-    <Hero title={description} />
-    <SelectedWork projects={work} />
+    <Hero title={heroTitle} lede={heroLede} />
+    <Process />
+    <DigitalLabs projects={labProjects} />
     <Services />
+    <OpenSource />
     <Contact />
   </main>
   <SiteFooter />

@@ -1,7 +1,7 @@
 ---
 import Container from './ui/Container.astro';
 
-interface Step {
+interface Example {
   title: string;
   text: string;
 }
@@ -11,32 +11,22 @@ interface Props {
   eyebrow?: string;
   title?: string;
   lede?: string;
-  steps?: Step[];
+  examples?: Example[];
+  disclaimer?: string;
 }
 
 const {
   id = 'services',
   eyebrow = 'Services',
-  title = 'How web work gets built',
-  lede = 'QNR builds as a founder-led studio. Web work starts from a real problem, ships as a small version, and stays clear about what is finished.',
-  steps = [
-    {
-      title: 'Start from the problem',
-      text: 'QNR builds useful software, tools, and pages that solve a real problem.',
-    },
-    {
-      title: 'Ship a small version',
-      text: 'The first version stays small. QNR then learns, improves, and iterates.',
-    },
-    {
-      title: 'Choose technology on purpose',
-      text: 'The stack is chosen for the job, and the result stays lightweight and easy to maintain.',
-    },
-    {
-      title: 'State what is true',
-      text: 'Project status, ownership, and availability are explained plainly.',
-    },
+  title = 'Turning your ideas into practical digital solutions.',
+  lede = 'From early concepts to working products, QNR Labs helps turn ideas and real-world challenges into practical digital solutions through thoughtful development and iterative experimentation.',
+  examples = [
+    { title: 'Web Development', text: 'Websites and web applications' },
+    { title: 'Digital Product Development', text: 'Turning ideas into usable products' },
+    { title: 'Custom Software', text: 'Software tailored to specific needs' },
+    { title: 'Technical Solutions', text: 'Practical solutions to digital challenges' },
   ],
+  disclaimer = 'These categories are examples, not a confirmed offer list.',
 } = Astro.props;
 
 const titleId = `${id}-title`;
@@ -50,19 +40,17 @@ const titleId = `${id}-title`;
         <h2 id={titleId}>{title}</h2>
         <p class="lede">{lede}</p>
       </header>
-      <ol class="steps">
+      <ol class="examples">
         {
-          steps.map((step, index) => (
+          examples.map((example) => (
             <li>
-              <span class="index">{String(index + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
+              <h3>{example.title}</h3>
+              <p>{example.text}</p>
             </li>
           ))
         }
       </ol>
+      <p class="disclaimer">{disclaimer}</p>
     </div>
   </Container>
 </section>
@@ -70,16 +58,16 @@ const titleId = `${id}-title`;
 <style>
   .section {
     padding-block: 80px;
-    scroll-margin-top: 76px;
+    scroll-margin-top: 104px;
   }
 
   .layout {
     display: grid;
-    gap: 48px;
+    gap: 32px;
   }
 
   .intro {
-    max-width: 36rem;
+    max-width: 38rem;
   }
 
   .eyebrow {
@@ -94,48 +82,37 @@ const titleId = `${id}-title`;
 
   h2 {
     margin: 0;
-    max-width: 12ch;
+    max-width: 16ch;
     color: var(--color-ink-black);
     font-size: var(--text-heading-lg);
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-heading-lg);
     letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
   }
 
   .lede {
     margin: 20px 0 0;
-    max-width: 38ch;
     color: var(--color-body-brown);
     font-size: var(--text-body);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
   }
 
-  .steps {
+  .examples {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .steps li {
-    display: grid;
-    grid-template-columns: 2.75rem minmax(0, 1fr);
-    gap: 8px 16px;
-    padding-block: 22px;
+  .examples li {
+    padding-block: 20px;
     border-top: 1px solid var(--color-stone-border);
   }
 
-  .steps li:last-child {
+  .examples li:last-child {
     border-bottom: 1px solid var(--color-stone-border);
-  }
-
-  .index {
-    color: var(--color-muted-gray);
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
-    font-variant-numeric: tabular-nums;
-    line-height: var(--leading-heading);
-    letter-spacing: 0.04em;
   }
 
   h3 {
@@ -147,13 +124,22 @@ const titleId = `${id}-title`;
     letter-spacing: var(--tracking-heading);
   }
 
-  .steps p {
+  .examples p {
     margin: 8px 0 0;
     max-width: 46ch;
     color: var(--color-body-brown);
     font-size: var(--text-body);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
+  }
+
+  .disclaimer {
+    margin: 0;
+    max-width: 42ch;
+    color: var(--color-muted-gray);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
   }
 
   @media (min-width: 900px) {
@@ -163,8 +149,12 @@ const titleId = `${id}-title`;
 
     .layout {
       grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: 80px;
+      gap: 48px 80px;
       align-items: start;
+    }
+
+    .disclaimer {
+      grid-column: 1 / -1;
     }
   }
 </style>

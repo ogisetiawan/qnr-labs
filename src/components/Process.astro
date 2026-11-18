@@ -17,16 +17,52 @@ interface Props {
 }
 
 const {
-  id = 'process',
-  title = 'From a rough idea to a product',
-  lede = 'QNR starts with a real problem, shapes a small version, and ships a product other people can use.',
+  id = 'how-we-build',
+  title = 'Thoughtful development, from idea to release.',
+  lede = 'These stages are a recommended framework—not a rigid sequence for every project.',
   steps = [
-    { phase: 'Notice', verb: 'Idea', sub: 'Rough', mark: 'Problem', tone: 'sky' },
-    { phase: 'Shape', verb: 'Clear', sub: 'One idea', mark: 'Shape', tone: 'honey' },
-    { phase: 'Build', verb: 'Small', sub: 'First version', mark: 'Build', tone: 'grass' },
-    { phase: 'Learn', verb: 'Iterate', sub: 'Then improve', mark: 'Learn', tone: 'mint' },
-    { phase: 'State', verb: 'Honest', sub: 'What is true', mark: 'Status', tone: 'plum' },
-    { phase: 'Ship', verb: 'Product', sub: 'Others can use', mark: 'Share', tone: 'ember' },
+    {
+      phase: 'Discover',
+      verb: 'Discover',
+      sub: 'Understand the problem, goals, and actual needs.',
+      mark: '01',
+      tone: 'sky',
+    },
+    {
+      phase: 'Define',
+      verb: 'Define',
+      sub: 'Shape requirements and determine the right solution.',
+      mark: '02',
+      tone: 'honey',
+    },
+    {
+      phase: 'Design',
+      verb: 'Design',
+      sub: 'Define the product experience and technical approach.',
+      mark: '03',
+      tone: 'mint',
+    },
+    {
+      phase: 'Build',
+      verb: 'Build',
+      sub: 'Develop a functional and usable solution.',
+      mark: '04',
+      tone: 'grass',
+    },
+    {
+      phase: 'Validate',
+      verb: 'Validate',
+      sub: 'Test, evaluate, and improve the result.',
+      mark: '05',
+      tone: 'sun',
+    },
+    {
+      phase: 'Deliver',
+      verb: 'Deliver',
+      sub: 'Release the product and communicate its outcome.',
+      mark: '06',
+      tone: 'coral',
+    },
   ],
 } = Astro.props;
 
@@ -117,7 +153,7 @@ const titleId = `${id}-title`;
   }
 
   .phase {
-    color: var(--color-ink-black);
+    color: var(--color-body-brown);
     font-size: var(--text-micro);
     font-weight: var(--font-weight-semibold);
     line-height: var(--leading-micro);
@@ -134,18 +170,22 @@ const titleId = `${id}-title`;
     max-width: 132px;
     min-height: 72px;
     padding: 12px 10px;
-    background: var(--surface-pure-white);
-    border: 1px solid color-mix(in srgb, var(--tone) 68%, var(--color-ink-black));
+    background: var(--tone);
     border-radius: var(--radius-cards);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink-black) 12%, transparent);
     transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .sky {
-    --tone: var(--color-sky-blue);
+  .sun {
+    --tone: var(--color-sun-yellow);
   }
 
   .honey {
     --tone: var(--color-honey);
+  }
+
+  .sky {
+    --tone: var(--color-sky-blue);
   }
 
   .grass {
@@ -156,12 +196,8 @@ const titleId = `${id}-title`;
     --tone: var(--color-mint);
   }
 
-  .plum {
-    --tone: var(--color-plum-violet);
-  }
-
-  .ember {
-    --tone: var(--color-ember-orange);
+  .coral {
+    --tone: var(--color-coral-pink);
   }
 
   .verb,
@@ -170,8 +206,12 @@ const titleId = `${id}-title`;
     display: block;
   }
 
-  .verb {
+  .verb,
+  .sub {
     color: var(--color-ink-black);
+  }
+
+  .verb {
     font-size: var(--text-caption);
     font-weight: var(--font-weight-semibold);
     line-height: var(--leading-caption);
@@ -179,7 +219,6 @@ const titleId = `${id}-title`;
   }
 
   .sub {
-    color: var(--color-body-brown);
     font-size: var(--text-micro);
     line-height: var(--leading-micro);
     letter-spacing: var(--tracking-micro);
@@ -230,7 +269,7 @@ const titleId = `${id}-title`;
       left: 8%;
       right: 8%;
       height: 1px;
-      background: rgba(41, 45, 50, 0.16);
+      background: color-mix(in srgb, var(--color-ink-black) 22%, var(--color-stone-surface));
     }
 
     .steps {

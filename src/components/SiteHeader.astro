@@ -15,12 +15,13 @@ interface Props {
 
 const {
   links = [
-    { href: '#labs', label: 'Labs' },
-    { href: '#services', label: 'Services' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/#labs', label: 'Digital Labs' },
+    { href: '/#how-we-build', label: 'How We Build' },
+    { href: '/#services', label: 'Services' },
+    { href: '/about', label: 'About' },
   ],
-  ctaHref = '#labs',
-  ctaLabel = 'Explore labs',
+  ctaHref = '/#contact',
+  ctaLabel = 'Contact',
 } = Astro.props;
 ---
 
@@ -28,7 +29,7 @@ const {
 <header class="site-header">
   <Container class="bar">
     <a class="brand" href="/">
-      <img src="/brand/logo.svg" alt="QNR Labs" width="148" height="34" />
+      <img src="/brand/logo.svg" alt="QNR Digital Labs" width="148" height="34" />
     </a>
     <nav class="nav" aria-label="Primary">
       {
@@ -41,7 +42,6 @@ const {
       <Pill href={ctaHref}>{ctaLabel}</Pill>
     </div>
   </Container>
-  <div class="scroll-edge" aria-hidden="true"></div>
 </header>
 
 <script>
@@ -69,37 +69,9 @@ const {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: var(--color-cream-canvas);
+    background: transparent;
     container-type: scroll-state;
     container-name: site-header;
-  }
-
-  .scroll-edge {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    background: var(--color-stone-surface);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @container site-header scroll-state(stuck: top) {
-    .scroll-edge {
-      opacity: 1;
-    }
-  }
-
-  .site-header.is-stuck .scroll-edge {
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-edge {
-      transition: none;
-    }
   }
 
   .bar {
@@ -108,7 +80,42 @@ const {
     align-items: center;
     justify-content: space-between;
     gap: 8px 16px;
-    min-height: 76px;
+    padding: 10px 0;
+    border-radius: var(--radius-pills);
+    background: transparent;
+    box-shadow: none;
+    transform: translateY(0);
+    transition:
+      background-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+      padding 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @container site-header scroll-state(stuck: top) {
+    .bar {
+      transform: translateY(10px);
+      padding-inline: 20px;
+      background: var(--surface-pure-white);
+      box-shadow:
+        0 0 0 1px rgba(41, 45, 50, 0.08),
+        0 8px 24px rgba(41, 45, 50, 0.12);
+    }
+  }
+
+  .site-header.is-stuck .bar {
+    transform: translateY(10px);
+    padding-inline: 20px;
+    background: var(--surface-pure-white);
+    box-shadow:
+      0 0 0 1px rgba(41, 45, 50, 0.08),
+      0 8px 24px rgba(41, 45, 50, 0.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar {
+      transition: none;
+    }
   }
 
   .brand {
@@ -129,7 +136,7 @@ const {
   .nav a {
     color: var(--color-heading-charcoal);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 22px;
     padding: 8px 12px;
     border-radius: var(--radius-buttons);

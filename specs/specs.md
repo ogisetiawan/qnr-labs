@@ -164,6 +164,8 @@ Each project is a content entry with:
 
 ### Reference sites (same content or product )
 
+- https://bikindigital.id/
+- https://lighter-preview.framer.website/
 - https://unifato.com/agnova/project-details.html
 - https://cirqle.studio/
 - https://px7.digital/
@@ -171,6 +173,7 @@ Each project is a content entry with:
 
 ### Reference sites ( for refrencee design and layout )
 - https://family.co/
+- https://qai.io/
 
 
 ### Ignore
@@ -214,7 +217,7 @@ Do not add a package that this table does not list unless the spec gains a requi
 - **pnpm:** the only package manager. Do not commit `package-lock.json` or `yarn.lock`.
 - **Git:** required. This site is not served by XAMPP, Apache, PHP, or MySQL. A checkout under `htdocs` is only a folder location.
 - **Scaffold:** `pnpm create astro@latest` with TypeScript strict, an empty project (no UI framework), and static output.
-- **Local commands:** `pnpm dev` for the dev server. `pnpm build` must succeed after each milestone in section 11. `pnpm astro check` must pass after type or content-schema changes.
+- **Local commands:** `pnpm dev` for the dev server. `pnpm build` must succeed after each milestone in section 11. `pnpm astro check` must pass after type or content-schema changes. The owner runs these and decides whether the result is correct. An agent runs one only when the current request explicitly asks for it. The agent does not check for a running server, take screenshots, or open a browser.
 - **Lint:** do not add ESLint unless a later spec requires it. Type checking is `astro check`.
 - **Secrets:** no environment variables in the MVP. Do not invent API keys or a `.env` file.
 

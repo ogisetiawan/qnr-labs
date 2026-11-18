@@ -18,7 +18,7 @@ interface Props {
   id?: string;
 }
 
-const { projects, title = 'Labs', id = 'labs' } = Astro.props;
+const { projects, title = 'Digital Labs', id = 'labs' } = Astro.props;
 const titleId = `${id}-title`;
 ---
 
@@ -40,8 +40,7 @@ const titleId = `${id}-title`;
 <style>
   .section {
     padding-block: 80px;
-    background: var(--color-stone-surface);
-    scroll-margin-top: 76px;
+    scroll-margin-top: 104px;
   }
 
   h2 {
