@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SelectedWork from '@components/SelectedWork.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import SiteHeader from '@components/SiteHeader.astro';
+import SkipLink from '@components/ui/SkipLink.astro';
+import { labProjects } from '../data/labs';
+
+const description = 'Released open-source projects from QNR Labs.';
+---
+
+<BaseLayout title="Digital Labs — QNR Labs" description={description}>
+  <SkipLink />
+  <SiteHeader />
+  <main id="content">
+    <SelectedWork projects={labProjects} />
+  </main>
+  <SiteFooter />
+</BaseLayout>

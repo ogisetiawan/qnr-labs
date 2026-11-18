@@ -1,0 +1,241 @@
+---
+import Container from './ui/Container.astro';
+
+interface Step {
+  phase: string;
+  verb: string;
+  sub: string;
+  mark: string;
+  tone: string;
+}
+
+interface Props {
+  id?: string;
+  title?: string;
+  lede?: string;
+  steps?: Step[];
+}
+
+const {
+  id = 'process',
+  title = 'From a rough idea to a product',
+  lede = 'QNR starts with a real problem, shapes a small version, and ships a product other people can use.',
+  steps = [
+    { phase: 'Notice', verb: 'Idea', sub: 'Rough', mark: 'Problem', tone: 'sky' },
+    { phase: 'Shape', verb: 'Clear', sub: 'One idea', mark: 'Shape', tone: 'honey' },
+    { phase: 'Build', verb: 'Small', sub: 'First version', mark: 'Build', tone: 'grass' },
+    { phase: 'Learn', verb: 'Iterate', sub: 'Then improve', mark: 'Learn', tone: 'mint' },
+    { phase: 'State', verb: 'Honest', sub: 'What is true', mark: 'Status', tone: 'plum' },
+    { phase: 'Ship', verb: 'Product', sub: 'Others can use', mark: 'Share', tone: 'ember' },
+  ],
+} = Astro.props;
+
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="process" aria-labelledby={titleId}>
+  <Container>
+    <h2 id={titleId}>{title}</h2>
+    <p class="lede">{lede}</p>
+    <div class="diagram">
+      <div class="track" aria-hidden="true"></div>
+      <ol class="steps">
+        {
+          steps.map((step) => (
+            <li class:list={['step', step.tone]}>
+              <span class="phase">{step.phase}</span>
+              <div class="node">
+                <span class="verb">{step.verb}</span>
+                <span class="sub">{step.sub}</span>
+              </div>
+              <span class="mark">{step.mark}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .process {
+    padding-block: 80px;
+    scroll-margin-top: 104px;
+  }
+
+  h2 {
+    margin: 0;
+    max-width: 16ch;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin: 20px 0 0;
+    max-width: 42ch;
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+    text-wrap: pretty;
+  }
+
+  .diagram {
+    position: relative;
+    margin-top: 36px;
+    padding: 28px 16px;
+    background: var(--color-stone-surface);
+    border-radius: var(--radius-3xl);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .track {
+    display: none;
+  }
+
+  .steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .phase {
+    color: var(--color-ink-black);
+    font-size: var(--text-micro);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-micro);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .node {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    max-width: 132px;
+    min-height: 72px;
+    padding: 12px 10px;
+    background: var(--surface-pure-white);
+    border: 1px solid color-mix(in srgb, var(--tone) 68%, var(--color-ink-black));
+    border-radius: var(--radius-cards);
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sky {
+    --tone: var(--color-sky-blue);
+  }
+
+  .honey {
+    --tone: var(--color-honey);
+  }
+
+  .grass {
+    --tone: var(--color-grass-green);
+  }
+
+  .mint {
+    --tone: var(--color-mint);
+  }
+
+  .plum {
+    --tone: var(--color-plum-violet);
+  }
+
+  .ember {
+    --tone: var(--color-ember-orange);
+  }
+
+  .verb,
+  .sub,
+  .mark {
+    display: block;
+  }
+
+  .verb {
+    color: var(--color-ink-black);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
+  }
+
+  .sub {
+    color: var(--color-body-brown);
+    font-size: var(--text-micro);
+    line-height: var(--leading-micro);
+    letter-spacing: var(--tracking-micro);
+  }
+
+  .mark {
+    padding: 3px 8px;
+    border-radius: var(--radius-pills);
+    background: var(--surface-sand);
+    color: var(--color-body-brown);
+    font-size: var(--text-micro);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-micro);
+    letter-spacing: var(--tracking-micro);
+    box-shadow: inset 0 0 0 1px var(--color-stone-border);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .step:hover .node {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (min-width: 720px) {
+    .diagram {
+      padding: 36px 20px;
+    }
+
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px 12px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .process {
+      padding-block: 104px;
+    }
+
+    .diagram {
+      padding: 44px 24px;
+    }
+
+    .track {
+      display: block;
+      position: absolute;
+      top: 111px;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: rgba(41, 45, 50, 0.16);
+    }
+
+    .steps {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px 8px;
+    }
+  }
+</style>

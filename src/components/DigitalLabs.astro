@@ -1,0 +1,166 @@
+---
+import Container from './ui/Container.astro';
+import Pill from './ui/Pill.astro';
+import type { LabProject } from '../data/labs';
+
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  projects: LabProject[];
+  id?: string;
+  title?: string;
+  href?: string;
+  action?: string;
+}
+
+const {
+  projects,
+  id = 'labs',
+  title = 'Released work, in one place.',
+  href = '/labs',
+  action = 'View projects',
+} = Astro.props;
+
+const released = projects.filter((project) => project.status === 'Released');
+const installFact = released.find((project) => project.highlight === '100+ installs');
+
+const stats: Stat[] = [
+  {
+    value: String(released.length),
+    label: released.length === 1 ? 'Released project' : 'Released projects',
+  },
+  ...(installFact
+    ? [{ value: '100+', label: `Installs on ${installFact.title}` }]
+    : []),
+  {
+    value: 'Open source',
+    label: 'Projects other people can use',
+  },
+  {
+    value: 'Founder-led',
+    label: 'Built by the founder, not a team',
+  },
+];
+
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="section" aria-labelledby={titleId}>
+  <Container>
+    <div class="layout">
+      <div class="intro">
+        <p class="eyebrow">Digital Labs</p>
+        <h2 id={titleId}>{title}</h2>
+        <Pill href={href}>{action}</Pill>
+      </div>
+      <ul class="stats">
+        {
+          stats.map((stat) => (
+            <li>
+              <p class:list={['value', stat.value.length > 5 && 'value-long']}>{stat.value}</p>
+              <p class="label">{stat.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding-block: 80px;
+    scroll-margin-top: 104px;
+  }
+
+  .layout {
+    display: grid;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 12px;
+    color: var(--color-muted-gray);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-caption);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0 0 28px;
+    max-width: 11ch;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stats li {
+    margin: 0;
+    padding: 32px 24px;
+    text-align: center;
+    background: var(--surface-pure-white);
+    border-radius: var(--radius-cards);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .value,
+  .label {
+    margin: 0;
+  }
+
+  .value {
+    color: var(--color-ink-black);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+  }
+
+  .value-long {
+    font-size: var(--text-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .label {
+    margin-top: 8px;
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
+  }
+
+  @media (min-width: 640px) {
+    .stats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .section {
+      padding-block: 104px;
+    }
+
+    .layout {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 64px;
+    }
+  }
+</style>

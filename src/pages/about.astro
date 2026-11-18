@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import About from '@components/About.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import SiteHeader from '@components/SiteHeader.astro';
+import SkipLink from '@components/ui/SkipLink.astro';
+
+const description =
+  'QNR Labs is an independent, founder-led studio. QNR builds useful software, tools, and digital solutions.';
+---
+
+<BaseLayout title="About — QNR Labs" description={description}>
+  <SkipLink />
+  <SiteHeader />
+  <main id="content">
+    <About />
+  </main>
+  <SiteFooter />
+</BaseLayout>

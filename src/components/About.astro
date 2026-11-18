@@ -1,0 +1,61 @@
+---
+import Container from './ui/Container.astro';
+
+interface Props {
+  id?: string;
+  title?: string;
+  text?: string;
+}
+
+const {
+  id = 'about',
+  title = 'About',
+  text = 'QNR Labs is an independent, founder-led studio. QNR builds useful software, tools, and digital solutions. Released work is listed in Digital Labs. There is no team and no formal company structure.',
+} = Astro.props;
+
+const titleId = `${id}-title`;
+---
+
+<section id={id} class="section" aria-labelledby={titleId}>
+  <Container>
+    <div class="copy">
+      <h1 id={titleId}>{title}</h1>
+      <p>{text}</p>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding-block: 80px;
+    scroll-margin-top: 104px;
+  }
+
+  .copy {
+    max-width: 38rem;
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--color-ink-black);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+  }
+
+  p {
+    margin: 20px 0 0;
+    max-width: 46ch;
+    color: var(--color-body-brown);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  @media (min-width: 900px) {
+    .section {
+      padding-block: 104px;
+    }
+  }
+</style>
