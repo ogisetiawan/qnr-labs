@@ -20,10 +20,12 @@ const titleId = `${id}-title`;
 
 <section id={id} class="section" aria-labelledby={titleId}>
   <Container>
-    <div class="layout">
-      <p class="eyebrow">{eyebrow}</p>
-      <h2 id={titleId}>{title}</h2>
-      <p class="lede">{lede}</p>
+    <div class="band">
+      <div class="layout">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id={titleId}>{title}</h2>
+        <p class="lede">{lede}</p>
+      </div>
     </div>
   </Container>
 </section>
@@ -32,6 +34,13 @@ const titleId = `${id}-title`;
   .section {
     padding-block: 80px;
     scroll-margin-top: 104px;
+  }
+
+  .band {
+    padding: 40px var(--card-padding);
+    background: var(--color-stone-surface);
+    border-radius: var(--radius-3xl);
+    box-shadow: var(--shadow-subtle);
   }
 
   .layout {

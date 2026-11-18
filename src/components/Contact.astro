@@ -34,20 +34,20 @@ const titleId = `${id}-title`;
       <div class="copy">
         <h2 id={titleId}>{title}</h2>
         <p class="lede">{lede}</p>
-        <ul>
+        <ul class="channels" aria-label="Contact channels">
           {
             channels.map((channel) => (
               <li>
                 {channel.href ? (
                   <a href={channel.href}>
-                    <span>{channel.label}</span>
-                    <span>{channel.value}</span>
+                    <span class="label">{channel.label}</span>
+                    <span class="value">{channel.value}</span>
                     <span class="arrow" aria-hidden="true">→</span>
                   </a>
                 ) : (
                   <span class="channel">
-                    <span>{channel.label}</span>
-                    <span>{channel.value}</span>
+                    <span class="label">{channel.label}</span>
+                    <span class="value">{channel.value}</span>
                   </span>
                 )}
               </li>
@@ -95,32 +95,59 @@ const titleId = `${id}-title`;
     text-wrap: pretty;
   }
 
-  ul {
-    display: grid;
-    gap: 12px;
+  .channels {
     margin: 28px 0 0;
     padding: 0;
     list-style: none;
   }
 
+  .channels li {
+    padding-block: 16px;
+    box-shadow: inset 0 -1px 0 var(--color-stone-border);
+  }
+
+  .channels li:first-child {
+    box-shadow:
+      inset 0 1px 0 var(--color-stone-border),
+      inset 0 -1px 0 var(--color-stone-border);
+  }
+
   a,
   .channel {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+    width: 100%;
     font-size: var(--text-body);
-    font-weight: var(--font-weight-medium);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
   }
 
   a {
     color: var(--color-link-blue);
-    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-ember-orange);
+    outline-offset: 2px;
   }
 
   .channel {
     color: var(--color-ink-black);
+  }
+
+  .label {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-heading-charcoal);
+  }
+
+  .value {
+    color: var(--color-body-brown);
   }
 
   .art {
