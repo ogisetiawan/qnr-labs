@@ -1,81 +1,97 @@
-# QNR Labs — Agent Instructions
+# AGENTS.md
 
-Static Astro site for `qnr.my.id`. Product and technical truth is `specs/specs.md`. Token values live in `src/styles/global.css`. How to use them is in the UI section below and in `specs/design.md`.
+## Project Context
 
-## Precedence
+Static Astro site for **QNR Digital Labs** at `qnr.my.id`: an open-source project showcase. Projects start from the founder's own problems and are published for other people to use. Visitors with their own problem can ask QNR to build it.
 
-1. The user's current request.
-2. `specs/specs.md` for scope and copy. `src/styles/global.css` for token values. `specs/design.md` for how those tokens are used.
-3. This file.
-4. A skill in `.cursor/skills/`, and only where it does not contradict 1–3.
+**Stack:** Astro (static), TypeScript strict, Tailwind CSS v4 via `@tailwindcss/vite`, pnpm, Node 26.
 
-When a hex value in `specs/design.md` disagrees with `src/styles/global.css`, use the stylesheet.
+**Source of truth**
 
-If `specs/` or a required document is missing, stop and say so. If the spec and the repo disagree, follow the pinned repo (`package.json` `engines`, `.nvmrc`) and report the conflict. Do not invent a resolution. The development-environment paragraph still says Node 24; `engines`, `.nvmrc`, and checklist T1 pin Node 26.
+| Topic | File |
+| --- | --- |
+| Scope, copy, stack, allowed deps | `specs/specs.md` |
+| Token values | `src/styles/global.css` |
+| How tokens are used | `specs/design.md` (through "Do's and Don'ts") and the UI notes under Code Guidelines below |
 
-## Always
+**Precedence:** (1) the user's current request → (2) `specs/specs.md`, `src/styles/global.css`, `specs/design.md` → (3) this file → (4) skills in `.cursor/skills/` only when they do not contradict 1–3.
+
+If a hex in `specs/design.md` disagrees with `src/styles/global.css`, use the stylesheet. If `specs/` or a required document is missing, stop and report it. If the spec and the repo disagree, follow `package.json` `engines` and `.nvmrc` and report the conflict (do not invent a resolution). The development-environment paragraph in the spec still says Node 24; the repo pins Node 26.
+
+---
+
+## Development Rules
 
 - Read the relevant `specs/` sections before changing the site.
-- A required item marked **[TBD]** stays a labeled placeholder. Do not guess it. List every placeholder in the completion summary.
-- Do not build anything under Non-goals or Deferred. Do not add behavior the request and the spec do not ask for.
-- Do not invent copy, metrics, testimonials, clients, a team, or an expansion of "QNR". The site is founder-led. "QNR builds…" is a safe formulation. "Our team" is not.
-- Prefer content-driven rendering. A new project is one Markdown file, not a layout edit. Keep components small and typed. Ship no client JavaScript unless a requirement needs an island.
-- Add a dependency only when the allowed-deps table in `specs/specs.md` cannot meet the requirement. Say why first. For the MVP, do not add `react`, `@astrojs/react`, `@astrojs/mdx`, `@astrojs/vercel`, `@astrojs/tailwind`, `gray-matter`, or `react-markdown`.
-- Do not run `git commit`, `git push`, `pnpm build`, `pnpm dev`, `pnpm exec astro check`, or any deploy unless the user explicitly asks. A checkout under `htdocs` is only a folder. Do not use Apache, PHP, or MySQL.
+- Do only what the current request asks. Do not build Non-goals, Deferred items, or extra behavior the request and spec do not ask for.
+- Prefer content-driven rendering: a new project is one Markdown file in `src/content/work/`, not a layout edit.
+- Keep components small, typed, and consistent with existing patterns. Ship no client JavaScript unless a requirement needs an island.
+- Add a dependency only when the allowed-deps table in `specs/specs.md` cannot meet the requirement; say why first. For the MVP do not add `react`, `@astrojs/react`, `@astrojs/mdx`, `@astrojs/vercel`, `@astrojs/tailwind`, `gray-matter`, or `react-markdown`.
+- Change `public/brand/` only when the user asks.
+- When building or restyling UI, read `frontend-design/SKILL.md` for craft (hierarchy, rhythm, interaction, responsive, motion, labels). Do not follow that skill's lines that pick a new aesthetic, palette, or font.
 
-## Completion summary
+---
 
-- What changed.
-- Placeholders and **[TBD]** left in place.
-- What the owner must configure, provide, or finish.
-- Known limitations.
+## Commands
 
-## Skills
+Run these only when the **current message explicitly asks**. The owner validates the work; do not run commands to prove a result on your own.
 
-Read the skill file to the end before following it. Paths are under `.cursor/skills/`.
+| Action | Command |
+| --- | --- |
+| Install | `pnpm install` |
+| Development | `pnpm dev` |
+| Build | `pnpm build` |
+| Preview production build | `pnpm preview` |
+| Typecheck | `pnpm exec astro check` |
 
-| Skill | Load when | Stop |
-| --- | --- | --- |
-| `astro/SKILL.md` | `.astro` files, content collections, `astro.config`, routes, images, or deploy | Do not use `npx`. Do not add an adapter, island, or UI framework the spec does not require. When an Astro 7 API is unclear, check current docs instead of guessing. |
-| `frontend-design/SKILL.md` | Building or restyling a page or component. Follow the UI section below. | Not a design audit. Do not follow the skill's lines that say to pick a new aesthetic, palette, or font. |
-| `perf-astro/SKILL.md` | The user asks to optimize this site's performance | Do not install `astro-critters` or `@playform/compress`. Do not run a Lighthouse audit from this skill. |
-| `tlc-spec-driven/SKILL.md` | The user asks to specify, discuss, design, task, implement, validate, verify, UAT, or record, pause, or resume a feature | Not for a small direct edit. `.specs/` is the skill's planning workspace, not the product spec. |
+Do not use `npx` for Astro. TypeScript stays on 6 (`astro check` does not support TypeScript 7). Content collections: `src/content.config.ts`, `astro/zod`, `src/content/work/` (if the checklist says `src/content/config.ts`, follow section 9 of the spec and report the mismatch).
 
-### Overrides
+---
 
-- **Astro.** Package manager is pnpm. Scripts are `pnpm dev`, `pnpm build`, and `pnpm preview`. Typecheck is `pnpm exec astro check`. Keep TypeScript on 6; `astro check` does not support TypeScript 7. Content collections follow section 9: `src/content.config.ts`, `astro/zod`, files in `src/content/work/`. The checklist still says `src/content/config.ts`; follow section 9 and mention the mismatch.
-- **UI.** The look is already chosen. Use the skill for craft, and the UI section for the system. Change `public/brand/` only when the user asks.
-- **Performance.** Meet the section 9 Lighthouse targets inside the current stack: static HTML, no unnecessary client JS, `astro:assets`, explicit width, height, and `alt`, and `font-display: swap`.
-- **Spec-driven.** Product requirements stay in `specs/`. On Windows, run the skill scripts with `py -3`, and put `--root` before the subcommand. A local commit is in scope only when the user asked to execute that workflow. One task, one commit. Push and deploy stay out.
+## Code Guidelines
 
-## UI
+- Use clear names and small `.astro` modules; match imports and layout patterns already in the repo.
+- Use CSS variables from `src/styles/global.css`; do not hard-code alternate brand colors.
+- **[TBD]** stays a labeled placeholder. Do not guess release dates, URLs, licenses, repositories, personal-problem stories, or feature bullets. List every placeholder in the completion summary.
+- Copy must stay honest: no invented metrics, testimonials, clients, team, service menu, prices, or public expansion of "QNR". Safe: "QNR builds…", "ask QNR to build it". Not safe: "our team".
+- Semantic HTML, keyboard navigation, visible `:focus-visible`, WCAG AA contrast. Layout is written for 360, 768, and 1280 px without opening a browser to verify.
 
-Read `frontend-design/SKILL.md` when building or restyling, then apply this system. The skill's job here is hierarchy, rhythm, interaction, responsive behavior, motion, and clear labels. It does not choose a new brand.
+### UI system
 
-**Direction.** Warm parchment, quiet chrome, flat color, hairline borders. Saturated color is a small accent. One primary action in each group.
+**Direction:** Warm parchment, quiet chrome, flat color, hairline borders. One primary action per group.
 
 | Question | Read |
 | --- | --- |
 | Token values | `src/styles/global.css` |
-| Color roles, spacing, radius, elevation, do and don't | `specs/design.md`, through "Do's and Don'ts" |
-| How to compose | `frontend-design/references/` — spatial, typography, interaction, responsive, motion, ux-writing, and color-and-contrast |
+| Roles, spacing, radius, elevation, do/don't | `specs/design.md`, through "Do's and Don'ts" |
+| Composition patterns | `frontend-design/references/` |
 
-Text in `specs/design.md` after "Do's and Don'ts" shows another product (log in, tweets, mascots, Ethereum). Use it only to see a shape. Do not add those features or those words.
+Text in `specs/design.md` after "Do's and Don'ts" is another product (log in, tweets, mascots, Ethereum). Use only as shape; do not add those features or words.
 
-**Use the tokens this way**
+- UI text: `--font-inter` at 400, 500, 600; scale `--text-micro` … `--text-display`.
+- Display/hero: `--font-family` weight 500 at `--text-heading-lg` / `--text-display`. Family font file is **[TBD]**; do not substitute another typeface.
+- Page `--page-max-width`; sections 80–120px apart; cards 32px padding, white, `--radius-cards`, inset `--shadow-subtle` (no heavy drop shadow).
+- Primary: dark pill (`--surface-dark-surface`, cream text, `--radius-buttons`). Secondary: sand pill (`--surface-sand`). Tertiary: text only. `--color-ember-orange` for text links and focus ring, not filled buttons. `--color-link-blue` for inline links. `--color-alert-red` for destructive/error only.
+- Motion: transform and opacity only; respect `prefers-reduced-motion`. No gradient, glass, or glow on the site chrome.
 
-- UI text uses `--font-inter` at 400, 500, and 600. Sizes run from `--text-micro` to `--text-display`.
-- Display and hero use `--font-family` at weight 500, at `--text-heading-lg` and `--text-display`. The Family font file is **[TBD]**. Do not add another typeface to fill that gap.
-- Page width is `--page-max-width`. Sections sit 80–120px apart. Cards use 32px padding. Related items sit 8–12px apart. Vary the space so groups are tight and sections can breathe.
-- Cards are white, `--radius-cards` (10px), with the inset hairline `--shadow-subtle`. Do not lift them with a large drop shadow.
-- Primary action: dark pill, `--surface-dark-surface`, cream text, `--radius-buttons`. Secondary: sand pill, `--surface-sand`. Tertiary: text only. `--color-ember-orange` is for a text link and the focus ring, not a filled button. `--color-link-blue` is for an inline link, not a filled button.
-- Status color marks status only. `--color-alert-red` is for a destructive or error state only.
-- Keep the `:focus-visible` outline. Check 360, 768, and 1280. Text contrast meets WCAG AA.
-- Motion, when needed, uses transform and opacity and respects `prefers-reduced-motion`. No gradient, glass, or glow.
+---
 
-**Leave these skill lines unused**
+## Important Constraints
 
-- "Pick a tone, a palette, or a font pairing." Inter stays.
-- "Vary the aesthetic between generations."
-- A new OKLCH palette, gradient text, or dark glow.
-- New claims, metrics, testimonials, or a team. The skill's UX writing applies to labels, buttons, and empty states, using words `specs/specs.md` already allows.
+- Do not delete files or change critical config (`astro.config.mjs`, `package.json` engines, `.nvmrc`) without a clear request and scope.
+- Do not invent `.env`, API keys, or credentials.
+- Do not check whether the dev server is running; do not start or stop it or call `localhost`.
+- Do not take screenshots or launch Edge, Chrome, or headless browsers.
+- Do not run `git commit`, `git push`, `pnpm build`, `pnpm dev`, `pnpm preview`, `pnpm exec astro check`, Lighthouse, or deploy unless the current message asks.
+- This checkout under `htdocs` is only a folder. Do not use Apache, PHP, or MySQL to serve the site.
+- Performance bar (Lighthouse, etc.) is in `specs/specs.md`; do not install `astro-critters` or `@playform/compress`. Do not run Lighthouse from the perf skill unless asked.
+
+---
+
+## CHANGELOG (owner prompts)
+
+Use skill `git-workflow-and-versioning` when the owner asks:
+
+- **Generate changelog + bump version:** Review commits since the last release tag, pick the right SemVer bump, update `CHANGELOG.md`.
+- **Changelog from a commit range:** Same skill; scope to the range the owner gives.
+- **Cut a release:** Bump project version, write `CHANGELOG.md`, prepare the `git tag` command (commit/tag only when the owner asks).
