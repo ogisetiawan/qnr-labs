@@ -1,6 +1,7 @@
 ---
 import HeroArt from './HeroArt.astro';
 import Pill from './ui/Pill.astro';
+import SectionLabel from './ui/SectionLabel.astro';
 
 interface Props {
   title: string;
@@ -25,7 +26,7 @@ const {
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <p class="eyebrow">{eyebrow}</p>
+    <SectionLabel label={eyebrow} />
     <h1 id="hero-title" class="display">{title}</h1>
     <p class="lede">{lede}</p>
     <div class="hero-actions">
@@ -75,16 +76,6 @@ const {
   .hero :global(.art-right) {
     grid-area: right;
     justify-self: start;
-  }
-
-  .eyebrow {
-    margin: 0 0 20px;
-    color: var(--color-muted-gray);
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-caption);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   .display {

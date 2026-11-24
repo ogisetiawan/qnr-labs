@@ -1,5 +1,6 @@
 ---
 import Container from './ui/Container.astro';
+import SectionLabel from './ui/SectionLabel.astro';
 
 interface Example {
   title: string;
@@ -26,22 +27,14 @@ const {
     { title: 'Custom Software', text: 'Software tailored to specific needs' },
     { title: 'Technical Solutions', text: 'Practical solutions to digital challenges' },
   ],
-  disclaimer = 'These categories are examples, not a confirmed offer list.',
 } = Astro.props;
 
 const titleId = `${id}-title`;
-const disclaimerId = `${id}-disclaimer`;
 ---
 
 <section id={id} class="section" aria-labelledby={titleId}>
   <Container>
     <div class="layout">
-      <header class="intro">
-        <p class="eyebrow">{eyebrow}</p>
-        <h2 id={titleId}>{title}</h2>
-        <p class="lede">{lede}</p>
-      </header>
-
       <div class="list-panel">
         <ol class="examples" aria-label="Example service categories">
           {
@@ -55,9 +48,11 @@ const disclaimerId = `${id}-disclaimer`;
         </ol>
       </div>
 
-      <p id={disclaimerId} class="disclaimer">
-        {disclaimer}
-      </p>
+      <header class="intro">
+        <SectionLabel label={eyebrow} />
+        <h2 id={titleId}>{title}</h2>
+        <p class="lede">{lede}</p>
+      </header>
     </div>
   </Container>
 </section>
@@ -75,16 +70,6 @@ const disclaimerId = `${id}-disclaimer`;
 
   .intro {
     max-width: 38rem;
-  }
-
-  .eyebrow {
-    margin: 0 0 12px;
-    color: var(--color-muted-gray);
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-caption);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   h2 {
@@ -162,27 +147,19 @@ const disclaimerId = `${id}-disclaimer`;
     }
 
     .layout {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
       gap: 48px 72px;
       align-items: start;
     }
 
-    .intro {
+    .list-panel {
       grid-column: 1;
       grid-row: 1;
     }
 
-    .list-panel {
+    .intro {
       grid-column: 2;
       grid-row: 1;
-    }
-
-    .disclaimer {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      max-width: none;
-      padding-top: 24px;
-      box-shadow: inset 0 1px 0 var(--color-stone-border);
     }
   }
 </style>

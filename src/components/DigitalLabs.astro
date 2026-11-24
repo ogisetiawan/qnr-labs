@@ -1,6 +1,7 @@
 ---
 import Container from './ui/Container.astro';
 import Pill from './ui/Pill.astro';
+import SectionLabel from './ui/SectionLabel.astro';
 import type { LabProject } from '../data/labs';
 
 interface Props {
@@ -19,112 +20,109 @@ const {
   action = 'View projects',
 } = Astro.props;
 
-const featured =
-  projects.find((project) => project.status === 'Released') ?? projects[0];
+const featured = projects.find((project) => project.status === 'Released') ?? projects[0];
 
 const isConfirmedUrl = (value: string) =>
   value.trim().length > 0 && !value.trim().startsWith('[TBD');
 
 const titleId = `${id}-title`;
-const problemId = featured ? `${id}-problem` : undefined;
-const solutionId = featured ? `${id}-solution` : undefined;
+const projectTitleId = `${id}-project-title`;
 ---
 
 <section id={id} class="section" aria-labelledby={titleId}>
   <Container>
-    <div class="layout">
-      <div class="section-head">
-        <p class="eyebrow">Digital Labs</p>
-        <h2 id={titleId}>{title}</h2>
-        <Pill href={href}>{action}</Pill>
-      </div>
-
-      {
-        featured ? (
-          <article class="spotlight" aria-labelledby={`${id}-project-title`}>
-            <div
-              class="shot"
-              role="img"
-              aria-label="[TBD] Screenshot"
-            >
-              <span>[TBD] Screenshot</span>
-            </div>
-
-            <div class="spotlight-head">
-              <h3 id={`${id}-project-title`}>{featured.title}</h3>
-              <span class="status">{featured.status}</span>
-            </div>
-
-            <p class="highlight">
-              <span class="highlight-label">Verified highlight</span>
-              {featured.highlight}
-            </p>
-
-            <div class="zone">
-              <p class="zone-label">Product description</p>
-              <p class="zone-body">{featured.summary}</p>
-            </div>
-
-            <div class="zone">
-              <h4 id={problemId} class="zone-label">
-                The Problem
-              </h4>
-              <p class="zone-body" aria-labelledby={problemId}>
-                [TBD — problem story]
-              </p>
-            </div>
-
-            <div class="zone">
-              <h4 id={solutionId} class="zone-label">
-                The Solution
-              </h4>
-              <p class="zone-body" aria-labelledby={solutionId}>
-                [TBD — solution story]
-              </p>
-            </div>
-
-            <div class="zone">
-              <p class="zone-label">Project details</p>
-              <dl class="rows">
-                <div>
-                  <dt>Category</dt>
-                  <dd>[TBD]</dd>
-                </div>
-                <div>
-                  <dt>Technology</dt>
-                  <dd>[TBD]</dd>
-                </div>
-                <div>
-                  <dt>License</dt>
-                  <dd>[TBD]</dd>
-                </div>
-              </dl>
-            </div>
-
-            <dl class="rows">
-              <div>
-                <dt>Live demo</dt>
-                <dd>
-                  {isConfirmedUrl(featured.install) ? (
-                    <a href={featured.install}>Install</a>
-                  ) : (
-                    featured.install
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt>GitHub</dt>
-                <dd>[TBD]</dd>
-              </div>
-              <div>
-                <dt>Release date</dt>
-                <dd>{featured.date}</dd>
-              </div>
-            </dl>
-          </article>
-        ) : null
-      }
+    <div class="section-head">
+      <SectionLabel label="Digital Labs" />
+      <h2 id={titleId}>{title}</h2>
+      <Pill href={href}>{action}</Pill>
     </div>
+
+    {
+      featured ? (
+        <div class="feature">
+          <div class="preview">
+            <img src="/brand/mark.svg" alt="" width="120" height="108" />
+            <p>[TBD] Screenshot</p>
+          </div>
+
+          <ul class="rows">
+            <li>
+              <span class="well">01</span>
+              <div>
+                <p class="label">Product description</p>
+                <p class="sub">{featured.summary}</p>
+              </div>
+            </li>
+            <li>
+              <span class="well">02</span>
+              <div>
+                <p class="label">The Problem</p>
+                <p class="sub">[TBD — problem story]</p>
+              </div>
+            </li>
+            <li>
+              <span class="well">03</span>
+              <div>
+                <p class="label">The Solution</p>
+                <p class="sub">[TBD — solution story]</p>
+              </div>
+            </li>
+            <li class="details">
+              <span class="well">04</span>
+              <div>
+                <p class="label">Project details</p>
+                <dl>
+                  <div>
+                    <dt>Category</dt>
+                    <dd>[TBD]</dd>
+                  </div>
+                  <div>
+                    <dt>Technology</dt>
+                    <dd>[TBD]</dd>
+                  </div>
+                  <div>
+                    <dt>License</dt>
+                    <dd>[TBD]</dd>
+                  </div>
+                  <div>
+                    <dt>Live demo</dt>
+                    <dd>
+                      {
+                        isConfirmedUrl(featured.install) ? (
+                          <a href={featured.install}>Install</a>
+                        ) : (
+                          featured.install
+                        )
+                      }
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>GitHub</dt>
+                    <dd>[TBD]</dd>
+                  </div>
+                  <div>
+                    <dt>Release date</dt>
+                    <dd>{featured.date}</dd>
+                  </div>
+                </dl>
+              </div>
+            </li>
+            <li class="selected">
+              <span class="well">
+                <img src="/brand/mark.svg" alt="" width="22" height="20" />
+              </span>
+              <div>
+                <h3 id={projectTitleId}>{featured.title}</h3>
+                <p class="sub">
+                  {featured.status}
+                  {featured.highlight ? ` · ${featured.highlight}` : ''}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      ) : null
+    }
   </Container>
 </section>
 
@@ -134,23 +132,11 @@ const solutionId = featured ? `${id}-solution` : undefined;
     scroll-margin-top: 104px;
   }
 
-  .layout {
-    display: grid;
-    gap: 40px;
-  }
-
   .section-head {
     max-width: 28rem;
-  }
-
-  .eyebrow {
-    margin: 0 0 12px;
-    color: var(--color-muted-gray);
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-caption);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    margin-inline: auto;
+    margin-bottom: 40px;
+    text-align: center;
   }
 
   h2 {
@@ -160,140 +146,146 @@ const solutionId = featured ? `${id}-solution` : undefined;
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-heading-lg);
     letter-spacing: var(--tracking-heading-lg);
+    text-wrap: balance;
   }
 
-  .spotlight {
+  .feature {
+    display: grid;
+    gap: 16px;
+  }
+
+  .preview {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 16px;
+    min-height: 280px;
+    padding: 32px;
+    background: var(--color-stone-surface);
+    border-radius: var(--radius-3xl);
+  }
+
+  .preview img {
+    width: 120px;
+    height: auto;
+  }
+
+  .preview p {
     margin: 0;
-    padding: var(--card-padding);
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+
+  .rows {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rows li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    margin: 0;
+    padding: 16px 18px;
     background: var(--surface-pure-white);
     border-radius: var(--radius-cards);
     box-shadow: var(--shadow-subtle);
   }
 
-  .shot {
+  .details {
+    align-items: start;
+  }
+
+  .well {
     display: grid;
     place-items: center;
-    min-height: 200px;
-    margin-bottom: 28px;
-    background: var(--color-cream-canvas);
-    border-radius: var(--radius-cards);
-    box-shadow: inset 0 0 0 1px var(--color-stone-surface);
-    color: var(--color-body-brown);
-    font-size: var(--text-caption);
-    line-height: var(--leading-caption);
-  }
-
-  .spotlight-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 16px;
-    margin-bottom: 16px;
-  }
-
-  h3 {
-    margin: 0;
-    color: var(--color-heading-charcoal);
-    font-size: var(--text-heading);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading);
-    letter-spacing: var(--tracking-heading);
-  }
-
-  .status {
-    padding: 4px 12px;
-    border-radius: var(--radius-badges);
-    background: var(--surface-sand);
-    color: var(--color-heading-charcoal);
-    font-size: var(--text-micro);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-micro);
-  }
-
-  .highlight {
-    display: grid;
-    gap: 4px;
-    margin: 0 0 24px;
-    padding: 16px 20px;
-    background: var(--color-stone-surface);
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-md);
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
+    background: var(--surface-sand);
+    color: var(--color-ink-black);
+    font-size: var(--text-micro);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
   }
 
-  .highlight-label,
-  .zone-label {
+  .label,
+  h3,
+  .sub {
     margin: 0;
-    color: var(--color-muted-gray);
-    font-size: var(--text-caption);
+  }
+
+  .label,
+  h3 {
+    color: var(--color-ink-black);
+    font-size: var(--text-body);
     font-weight: var(--font-weight-medium);
-    line-height: var(--leading-caption);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .zone {
-    margin-bottom: 24px;
-  }
-
-  .zone .zone-label {
-    margin-bottom: 8px;
-  }
-
-  .zone-body {
-    margin: 0;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
   }
 
-  .rows {
-    display: grid;
-    gap: 0;
-    margin: 0;
+  .sub {
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
   }
 
-  .rows div {
+  .selected {
+    align-items: center;
+    background: var(--surface-dark-surface);
+    box-shadow: none;
+  }
+
+  .selected .well {
+    background: var(--surface-pure-white);
+  }
+
+  .selected .well img {
+    width: 22px;
+    height: auto;
+  }
+
+  .selected h3,
+  .selected .sub {
+    color: var(--color-cream-canvas);
+  }
+
+  dl {
+    display: grid;
+    gap: 8px;
+    margin: 12px 0 0;
+  }
+
+  dl div {
     display: grid;
     grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr);
-    gap: 16px;
-    align-items: baseline;
-    padding-block: 14px;
-    box-shadow: inset 0 -1px 0 var(--color-stone-surface);
+    gap: 12px;
   }
 
-  .rows div:first-child {
-    box-shadow:
-      inset 0 1px 0 var(--color-stone-surface),
-      inset 0 -1px 0 var(--color-stone-surface);
-  }
-
-  .rows dt {
+  dt,
+  dd {
     margin: 0;
-    color: var(--color-heading-charcoal);
     font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
     line-height: var(--leading-caption);
   }
 
-  .rows dd {
-    margin: 0;
+  dt {
+    color: var(--color-ink-black);
+    font-weight: var(--font-weight-medium);
+  }
+
+  dd {
     color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
   }
 
-  .rows a {
+  dd a {
     color: var(--color-link-blue);
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-  }
-
-  .rows a:focus-visible {
-    outline: 2px solid var(--color-ember-orange);
-    outline-offset: 2px;
   }
 
   @media (min-width: 900px) {
@@ -301,8 +293,14 @@ const solutionId = featured ? `${id}-solution` : undefined;
       padding-block: 104px;
     }
 
-    .layout {
-      gap: 48px;
+    .section-head {
+      margin-bottom: 48px;
+    }
+
+    .feature {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 24px;
+      align-items: stretch;
     }
   }
 </style>

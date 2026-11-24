@@ -1,75 +1,162 @@
 ---
-import Container from './ui/Container.astro';
+import Pill from './ui/Pill.astro';
+import SectionLabel from './ui/SectionLabel.astro';
+
+interface Spot {
+  x: number;
+  y: number;
+  tone: 'paper' | 'stone' | 'sand' | 'sun' | 'coral';
+}
 
 interface Props {
   id?: string;
   eyebrow?: string;
   title?: string;
   lede?: string;
+  href?: string;
+  action?: string;
 }
+
+const spots: Spot[] = [
+  { x: 24, y: 8, tone: 'stone' },
+  { x: 78, y: 5, tone: 'sun' },
+  { x: 50, y: 16, tone: 'paper' },
+  { x: 8, y: 48, tone: 'sand' },
+  { x: 20, y: 76, tone: 'stone' },
+  { x: 50, y: 92, tone: 'coral' },
+  { x: 90, y: 58, tone: 'paper' },
+  { x: 84, y: 76, tone: 'sand' },
+];
 
 const {
   id = 'open-source',
   eyebrow = 'Open source',
-  title = 'Selected work, shared on purpose',
-  lede = 'QNR publishes selected projects when a public repository or release is confirmed. Not every product is open source.',
+  title = 'Become a contributor',
+  lede = 'Together, we can turn ambitious goals into remarkable achievements',
+  href = '/labs',
+  action = 'Email us',
 } = Astro.props;
 
 const titleId = `${id}-title`;
 ---
 
 <section id={id} class="section" aria-labelledby={titleId}>
-  <Container>
-    <div class="band">
-      <div class="layout">
-        <p class="eyebrow">{eyebrow}</p>
-        <h2 id={titleId}>{title}</h2>
-        <p class="lede">{lede}</p>
-      </div>
+  <div class="stage">
+    <div class="rings" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </Container>
+    <ul class="spots" aria-hidden="true">
+      {
+        spots.map((spot) => (
+          <li class={spot.tone} style={`--x:${spot.x}%;--y:${spot.y}%;`}>
+            <img src="/brand/mark.svg" alt="" width="32" height="29" />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="copy">
+      <SectionLabel label={eyebrow} />
+      <h2 id={titleId}>{title}</h2>
+      <p class="lede">{lede}</p>
+      <Pill href={href}>
+        {action}
+        <span class="arrow" aria-hidden="true">→</span>
+      </Pill>
+    </div>
+  </div>
 </section>
 
 <style>
   .section {
-    padding-block: 80px;
+    padding-block: 50px;
     scroll-margin-top: 104px;
   }
 
-  .band {
-    padding: 40px var(--card-padding);
-    background: var(--color-stone-surface);
-    border-radius: var(--radius-3xl);
+  .stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(100% - 32px, 720px);
+    aspect-ratio: 1;
+    margin-inline: auto;
+  }
+
+  .rings,
+  .spots {
+    position: absolute;
+    inset: 0;
+  }
+
+  .rings span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 1px dashed var(--color-stone-border);
+    border-radius: var(--radius-pills);
+    transform: translate(-50%, -50%);
+  }
+
+  .rings span:nth-child(1) {
+    width: 92%;
+    height: 92%;
+  }
+
+  .rings span:nth-child(2) {
+    width: 66%;
+    height: 66%;
+  }
+
+  .rings span:nth-child(3) {
+    width: 42%;
+    height: 42%;
+  }
+
+  .spots {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .spots li {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pills);
     box-shadow: var(--shadow-subtle);
+    transform: translate(-50%, -50%);
   }
 
-  .layout {
-    max-width: 38rem;
+  .spots img {
+    width: 58%;
+    height: auto;
   }
 
-  .eyebrow {
-    margin: 0 0 12px;
-    color: var(--color-muted-gray);
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-caption);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+
+  .copy {
+    position: relative;
+    z-index: 1;
+    width: min(28rem, 72%);
+    text-align: center;
   }
 
   h2 {
     margin: 0;
-    max-width: 18ch;
     color: var(--color-ink-black);
-    font-size: var(--text-heading-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading-lg);
-    letter-spacing: var(--tracking-heading-lg);
+    font-size: var(--text-heading);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
     text-wrap: balance;
   }
 
   .lede {
-    margin: 20px 0 0;
+    margin: 16px 0 24px;
     color: var(--color-body-brown);
     font-size: var(--text-body);
     line-height: var(--leading-body);
@@ -77,9 +164,22 @@ const titleId = `${id}-title`;
     text-wrap: pretty;
   }
 
-  @media (min-width: 900px) {
-    .section {
-      padding-block: 104px;
+  .arrow {
+    margin-left: 8px;
+  }
+
+  @media (min-width: 720px) {
+    .spots li {
+      width: 56px;
+      height: 56px;
+    }
+
+    h2 {
+      font-size: var(--text-heading-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--leading-heading-lg);
+      letter-spacing: var(--tracking-heading-lg);
     }
   }
+
 </style>

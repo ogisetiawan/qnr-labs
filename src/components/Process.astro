@@ -1,5 +1,6 @@
 ---
 import Container from './ui/Container.astro';
+import SectionLabel from './ui/SectionLabel.astro';
 
 interface Step {
   phase: string;
@@ -11,6 +12,7 @@ interface Step {
 
 interface Props {
   id?: string;
+  eyebrow?: string;
   title?: string;
   lede?: string;
   steps?: Step[];
@@ -18,6 +20,7 @@ interface Props {
 
 const {
   id = 'how-we-build',
+  eyebrow = 'How we build',
   title = 'Thoughtful development, from idea to release.',
   lede = 'These stages are a recommended framework—not a rigid sequence for every project.',
   steps = [
@@ -71,8 +74,11 @@ const titleId = `${id}-title`;
 
 <section id={id} class="process" aria-labelledby={titleId}>
   <Container>
-    <h2 id={titleId}>{title}</h2>
-    <p class="lede">{lede}</p>
+    <div class="intro">
+      <SectionLabel label={eyebrow} />
+      <h2 id={titleId}>{title}</h2>
+      <p class="lede">{lede}</p>
+    </div>
     <div class="diagram">
       <div class="track" aria-hidden="true"></div>
       <ol class="steps">
@@ -99,10 +105,15 @@ const titleId = `${id}-title`;
     scroll-margin-top: 104px;
   }
 
+  .intro {
+    text-align: center;
+  }
+
   h2 {
-    margin: 0;
-    max-width: 16ch;
+    margin: 0 auto;
+    max-width: 20ch;
     color: var(--color-ink-black);
+    text-align: center;
     font-size: var(--text-heading-lg);
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-heading-lg);
@@ -111,9 +122,10 @@ const titleId = `${id}-title`;
   }
 
   .lede {
-    margin: 20px 0 0;
+    margin: 20px auto 0;
     max-width: 42ch;
     color: var(--color-body-brown);
+    text-align: center;
     font-size: var(--text-body);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
