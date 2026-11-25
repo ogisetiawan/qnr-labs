@@ -120,7 +120,7 @@ Use wording that remains accurate while the founder is working solo. Avoid copy 
 2. Hero: concise positioning statement and a “Explore work” link/action.
 3. Selected work: a few real projects with title, one-line description, category, status, and destination.
 4. Labs / experiments: optional; show only meaningful public experiments.
-5. Short About section: explain the independent, founder-led studio without overclaiming.
+5. Short About section: explain the Digital Labs Studio without overclaiming.
 6. Contact / footer: relevant links and copyright.
 
 ### Deliberately deferred (add only after the first real client project exists)
