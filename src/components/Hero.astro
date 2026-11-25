@@ -15,19 +15,28 @@ interface Props {
 
 const {
   title,
-  eyebrow = 'Independent, founder-led studio',
-  lede = 'QNR Labs is an independent digital studio building its own products and developing practical digital solutions for others.',
+  eyebrow = 'Digital Labs Studio',
+  lede,
   primaryHref = '#labs',
   primaryLabel = 'Explore Digital Labs',
   secondaryHref = '#how-we-build',
   secondaryLabel = 'How We Build',
 } = Astro.props;
+
+const accent = 'Made for everyone';
+const accentAt = title.indexOf(accent);
+const titleBefore = accentAt === -1 ? title : title.slice(0, accentAt);
+const titleAfter = accentAt === -1 ? '' : title.slice(accentAt + accent.length);
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
     <SectionLabel label={eyebrow} />
-    <h1 id="hero-title" class="display">{title}</h1>
+    <h1 id="hero-title" class="display">
+      {titleBefore}
+      {accentAt !== -1 && <span class="accent">{accent}</span>}
+      {titleAfter}
+    </h1>
     <p class="lede">{lede}</p>
     <div class="hero-actions">
       <Pill href={primaryHref}>{primaryLabel}</Pill>
@@ -88,6 +97,10 @@ const {
     line-height: var(--leading-heading-lg);
     letter-spacing: var(--tracking-heading-lg);
     text-wrap: balance;
+  }
+
+  .accent {
+    color: var(--color-stone-border);
   }
 
   .lede {
