@@ -1,0 +1,146 @@
+---
+interface Props {
+  stage: '01' | '02' | '03' | '04';
+  class?: string;
+}
+
+const { stage, class: className } = Astro.props;
+---
+
+<svg
+  class:list={['art', className]}
+  viewBox="0 0 64 64"
+  width="64"
+  height="64"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    stage === '01' && (
+      <g class="pop">
+        <path class="f-sun" d="M32 10a15 15 0 0 0-9 27c2 1.6 3 3.6 3 6v1h12v-1c0-2.4 1-4.4 3-6a15 15 0 0 0-9-27z" />
+        <path class="ln" d="M32 10a15 15 0 0 0-9 27c2 1.6 3 3.6 3 6v1h12v-1c0-2.4 1-4.4 3-6a15 15 0 0 0-9-27z" />
+        <path class="ln" d="M27 50h10M29 55h6" />
+        <path class="ln-thin" d="M28 26c2-3 6-3 8 0s-2 6 0 8" />
+        <path class="s-ember" d="M8 14l4 3M56 14l-4 3M6 30h5M58 30h-5" />
+      </g>
+    )
+  }
+  {
+    stage === '02' && (
+      <g class="pop">
+        <circle class="ln" cx="30" cy="34" r="20" />
+        <circle class="ln" cx="30" cy="34" r="12" />
+        <circle class="f-ember" cx="30" cy="34" r="5" />
+        <path class="ln" d="M30 34l20-20" />
+        <path class="ln" d="M44 12l6 2 2 6" />
+        <circle class="f-grass" cx="52" cy="50" r="6" />
+        <path class="ln-white" d="M49.5 50l1.8 1.8 3.4-3.6" />
+      </g>
+    )
+  }
+  {
+    stage === '03' && (
+      <g class="pop">
+        <rect class="f-white" x="14" y="10" width="36" height="46" rx="5" />
+        <rect class="ln" x="14" y="10" width="36" height="46" rx="5" />
+        <rect class="f-sky" x="24" y="6" width="16" height="8" rx="3" />
+        <rect class="ln" x="24" y="6" width="16" height="8" rx="3" />
+        <path class="s-grass" d="M21 25l3 3 5-5M21 37l3 3 5-5" />
+        <path class="ln" d="M33 26h10M33 38h10" />
+        <path class="ln-thin" d="M22 48h20" />
+      </g>
+    )
+  }
+  {
+    stage === '04' && (
+      <g class="pop">
+        <path class="f-coral" d="M22 46c-4 2-6 8-6 12 4 0 10-2 12-6z" />
+        <path class="f-white" d="M44 10c-12 2-20 12-22 26l10 10c14-2 24-10 26-22l-2-12z" />
+        <path class="ln" d="M44 10c-12 2-20 12-22 26l10 10c14-2 24-10 26-22l-2-12z" />
+        <circle class="f-sky" cx="43" cy="25" r="5" />
+        <circle class="ln" cx="43" cy="25" r="5" />
+        <path class="ln" d="M24 30l-10 2-4 8 12-2M38 44l-2 10 8-4 2-12" />
+        <path class="ln" d="M22 46c-4 2-6 8-6 12 4 0 10-2 12-6" />
+      </g>
+    )
+  }
+</svg>
+
+<style>
+  .art {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .ln,
+  .ln-thin,
+  .ln-white {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ln {
+    stroke: var(--color-heading-charcoal);
+    stroke-width: 2.5;
+  }
+
+  .ln-thin {
+    stroke: var(--color-heading-charcoal);
+    stroke-width: 2;
+  }
+
+  .ln-white {
+    stroke: var(--surface-pure-white);
+    stroke-width: 2;
+  }
+
+  .s-ember,
+  .s-grass {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .s-ember {
+    stroke: var(--color-ember-orange);
+  }
+
+  .s-grass {
+    stroke: var(--color-grass-green);
+  }
+
+  .f-sun { fill: var(--color-sun-yellow); }
+  .f-sky { fill: var(--color-sky-blue); }
+  .f-grass { fill: var(--color-grass-green); }
+  .f-ember { fill: var(--color-ember-orange); }
+  .f-coral { fill: var(--color-coral-pink); }
+  .f-white { fill: var(--surface-pure-white); }
+
+  .pop {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pop {
+      animation: art-pop 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: calc(120ms + var(--i, 0) * 90ms);
+    }
+  }
+
+  @keyframes art-pop {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.88);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

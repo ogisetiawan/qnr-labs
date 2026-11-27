@@ -19,8 +19,8 @@ const {
   lede,
   primaryHref = '#labs',
   primaryLabel = 'Explore Digital Labs',
-  secondaryHref = '#how-we-build',
-  secondaryLabel = 'How We Build',
+  secondaryHref = '#product-philosophy',
+  secondaryLabel = 'Product Philosophy',
 } = Astro.props;
 
 const accent = 'Made for everyone';
@@ -97,10 +97,6 @@ const titleAfter = accentAt === -1 ? '' : title.slice(accentAt + accent.length);
     line-height: var(--leading-heading-lg);
     letter-spacing: var(--tracking-heading-lg);
     text-wrap: balance;
-  }
-
-  .accent {
-    color: var(--color-stone-border);
   }
 
   .lede {

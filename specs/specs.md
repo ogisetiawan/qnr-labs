@@ -170,6 +170,7 @@ Each project is a content entry with:
 - https://cirqle.studio/
 - https://px7.digital/
 - https://dexon-react.vercel.app/
+- https://digitallabs.sg/#
 
 ### Reference sites ( for refrencee design and layout )
 - https://family.co/

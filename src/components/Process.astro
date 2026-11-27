@@ -2,69 +2,65 @@
 import Container from './ui/Container.astro';
 import SectionLabel from './ui/SectionLabel.astro';
 
-interface Step {
-  phase: string;
-  verb: string;
-  sub: string;
-  mark: string;
-  tone: string;
+interface Stage {
+  mark: '01' | '02' | '03' | '04';
+  title: string;
+  description: string;
+  svg?: string;
 }
 
 interface Props {
   id?: string;
   eyebrow?: string;
   title?: string;
+  title2?: string;
   lede?: string;
-  steps?: Step[];
+  intervalMs?: number;
+  stages?: Stage[];
 }
 
+const defaultSvgByStage: Record<Stage['mark'], string> = {
+  '01': '/svg/notice-capture.svg',
+  '02': '/svg/think-validate.svg',
+  '03': '/svg/define.svg',
+  '04': '/svg/create-share.svg',
+};
+
 const {
-  id = 'how-we-build',
-  eyebrow = 'How we build',
-  title = 'Thoughtful development, from idea to release.',
-  lede = 'These stages are a recommended framework—not a rigid sequence for every project.',
-  steps = [
+  id = 'product-philosophy',
+  eyebrow = 'Product Philosophy',
+  title = 'Product',
+  title2 = 'Philosophy',
+  lede = 'How QNR turns ideas into products',
+  intervalMs = 5000,
+  stages = [
     {
-      phase: 'Discover',
-      verb: 'Discover',
-      sub: 'Understand the problem, goals, and actual needs.',
       mark: '01',
-      tone: 'sky',
+      title: 'Notice & Capture',
+      description:
+        'Find & make feel problems, frustrations, and things that could be better. Write down rough ideas without worrying about perfect solutions.',
+      svg: '/svg/notice-capture.svg',
     },
     {
-      phase: 'Define',
-      verb: 'Define',
-      sub: 'Shape requirements and determine the right solution.',
       mark: '02',
-      tone: 'honey',
+      title: 'Think & Validate',
+      description:
+        'Structure ideas using SMART and explore possible solutions. Evaluate feasibility, potential value, and practical limitations.',
+      svg: '/svg/think-validate.svg',
     },
     {
-      phase: 'Design',
-      verb: 'Design',
-      sub: 'Define the product experience and technical approach.',
       mark: '03',
-      tone: 'mint',
+      title: 'Define',
+      description:
+        'Research, learn, and adapt relevant insights to the original goals. Shape the solution and prioritize essential features for the first version.',
+      svg: '/svg/define.svg',
     },
     {
-      phase: 'Build',
-      verb: 'Build',
-      sub: 'Develop a functional and usable solution.',
       mark: '04',
-      tone: 'grass',
-    },
-    {
-      phase: 'Validate',
-      verb: 'Validate',
-      sub: 'Test, evaluate, and improve the result.',
-      mark: '05',
-      tone: 'sun',
-    },
-    {
-      phase: 'Deliver',
-      verb: 'Deliver',
-      sub: 'Release the product and communicate its outcome.',
-      mark: '06',
-      tone: 'coral',
+      title: 'Create & Share',
+      description:
+        'Initialize the project, develop, test, and refine the product. Publish the finished product so others can benefit from it.',
+      svg: '/svg/create-share.svg',
     },
   ],
 } = Astro.props;
@@ -72,48 +68,196 @@ const {
 const titleId = `${id}-title`;
 ---
 
-<section id={id} class="process" aria-labelledby={titleId}>
+<section id={id} class="philosophy" aria-labelledby={titleId}>
   <Container>
-    <div class="intro">
+    <header class="intro">
       <SectionLabel label={eyebrow} />
-      <h2 id={titleId}>{title}</h2>
+      <h2 id={titleId}>{title} <span class="accent">{title2}</span></h2>
       <p class="lede">{lede}</p>
-    </div>
-    <div class="diagram">
-      <div class="track" aria-hidden="true"></div>
-      <ol class="steps">
+    </header>
+
+    <div
+      class="showcase"
+      data-philosophy-rotator
+      data-in-view="true"
+      style={`--interval: ${intervalMs}ms`}
+    >
+      <ol class="step-list">
         {
-          steps.map((step) => (
-            <li class:list={['step', step.tone]}>
-              <span class="phase">{step.phase}</span>
-              <div class="node">
-                <span class="verb">{step.verb}</span>
-                <span class="sub">{step.sub}</span>
-              </div>
-              <span class="mark">{step.mark}</span>
-            </li>
-          ))
+          stages.map((stage, index) => {
+            const isFirst = index === 0;
+            return (
+              <li class:list={['step-item', isFirst && 'is-active']} data-step-item>
+                <button
+                  type="button"
+                  class="step-trigger"
+                  aria-current={isFirst ? 'step' : undefined}
+                  data-step-trigger={index}
+                >
+                  <span class="step-title">{stage.title}</span>
+                </button>
+                <div class="step-detail" hidden={!isFirst} data-step-detail>
+                  <p class="step-body">{stage.description}</p>
+                </div>
+                <span class="progress-bar" data-progress-bar aria-hidden="true"></span>
+              </li>
+            );
+          })
         }
       </ol>
+
+      <div class="stage-canvas">
+        <div class="visual">
+          <div class="slides">
+            {
+              stages.map((stage, index) => {
+                const isFirst = index === 0;
+                const src = stage.svg ?? defaultSvgByStage[stage.mark];
+                return (
+                  <figure
+                    class:list={['slide', isFirst && 'is-active']}
+                    aria-hidden={isFirst ? 'false' : 'true'}
+                    data-step-slide
+                    data-step-mark={stage.mark}
+                  >
+                    <img
+                      src={src}
+                      alt={stage.title}
+                      width="320"
+                      height="200"
+                      decoding="async"
+                    />
+                  </figure>
+                );
+              })
+            }
+          </div>
+          <p class="step-badge" data-step-badge aria-live="polite">
+            Step {stages[0]?.mark ?? '01'}
+          </p>
+        </div>
+      </div>
     </div>
   </Container>
 </section>
 
+<script>
+  const rotators = document.querySelectorAll<HTMLElement>('[data-philosophy-rotator]');
+
+  rotators.forEach((root) => {
+    const items = Array.from(root.querySelectorAll<HTMLElement>('[data-step-item]'));
+    const triggers = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-step-trigger]'));
+    const details = Array.from(root.querySelectorAll<HTMLElement>('[data-step-detail]'));
+    const bars = Array.from(root.querySelectorAll<HTMLElement>('[data-progress-bar]'));
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-step-slide]'));
+    const badge = root.querySelector<HTMLElement>('[data-step-badge]');
+
+    if (items.length < 2) return;
+
+    let activeIndex = 0;
+
+    const setActive = (nextIndex: number, focusTrigger = false) => {
+      activeIndex = ((nextIndex % items.length) + items.length) % items.length;
+
+      items.forEach((item, i) => {
+        const isActive = i === activeIndex;
+        item.classList.toggle('is-active', isActive);
+
+        const trigger = triggers[i];
+        if (trigger) {
+          if (isActive) {
+            trigger.setAttribute('aria-current', 'step');
+            if (focusTrigger) trigger.focus();
+          } else {
+            trigger.removeAttribute('aria-current');
+          }
+        }
+
+        const detail = details[i];
+        if (detail) {
+          detail.hidden = !isActive;
+        }
+
+        const bar = bars[i];
+        if (bar && isActive) {
+          bar.style.animation = 'none';
+          void bar.offsetWidth;
+          bar.style.animation = '';
+        }
+      });
+
+      slides.forEach((slide, i) => {
+        const isActive = i === activeIndex;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      const activeSlide = slides[activeIndex];
+      const mark = activeSlide?.dataset.stepMark;
+      if (badge && mark) {
+        badge.textContent = `Step ${mark}`;
+      }
+    };
+
+    triggers.forEach((trigger, index) => {
+      trigger.addEventListener('click', () => {
+        setActive(index);
+      });
+
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          setActive(index + 1, true);
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          setActive(index - 1, true);
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          setActive(0, true);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          setActive(items.length - 1, true);
+        }
+      });
+    });
+
+    root.addEventListener('animationend', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement) || !target.hasAttribute('data-progress-bar')) return;
+      const parentItem = target.closest('[data-step-item]');
+      if (!parentItem || !parentItem.classList.contains('is-active')) return;
+      setActive(activeIndex + 1);
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            root.dataset.inView = entry.isIntersecting ? 'true' : 'false';
+          }
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(root);
+    }
+  });
+</script>
+
 <style>
-  .process {
+  .philosophy {
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     padding-block: 80px;
     scroll-margin-top: 104px;
   }
 
   .intro {
-    text-align: center;
+    max-width: 36rem;
   }
 
   h2 {
-    margin: 0 auto;
-    max-width: 20ch;
+    margin: 0;
     color: var(--color-ink-black);
-    text-align: center;
+    font-family: var(--font-family);
     font-size: var(--text-heading-lg);
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-heading-lg);
@@ -122,171 +266,265 @@ const titleId = `${id}-title`;
   }
 
   .lede {
-    margin: 20px auto 0;
-    max-width: 42ch;
+    margin: 16px 0 0;
     color: var(--color-body-brown);
-    text-align: center;
     font-size: var(--text-body);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
     text-wrap: pretty;
   }
 
-  .diagram {
-    position: relative;
+  .showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     margin-top: 40px;
-    padding: var(--card-padding) 20px;
-    background: var(--color-stone-surface);
-    border-radius: var(--radius-3xl);
+    overflow: hidden;
+    background: var(--surface-pure-white);
+    border-radius: var(--radius-cards);
     box-shadow: var(--shadow-subtle);
   }
 
-  .track {
-    display: none;
-  }
-
-  .steps {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 12px;
+  .step-list {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     list-style: none;
+    border-bottom: 1px solid var(--color-stone-border);
   }
 
-  .step {
+  .step-item {
+    position: relative;
+    margin: 0;
+  }
+
+  .step-item + .step-item {
+    border-top: 1px solid var(--color-stone-border);
+  }
+
+  .step-trigger {
+    display: block;
+    width: 100%;
+    padding: 20px 22px;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-inter);
+    text-align: left;
+    cursor: pointer;
+    transition: opacity 180ms var(--ease-out-expo);
+  }
+
+  .step-title {
+    color: var(--color-alt-blue);
+    font-size: var(--text-subheading);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-subheading);
+    letter-spacing: var(--tracking-subheading);
+  }
+
+  .step-item.is-active .step-trigger {
+    padding-bottom: 8px;
+  }
+
+  .step-item.is-active .step-title {
+    font-size: var(--text-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .step-detail {
+    padding: 0 22px 24px;
+  }
+
+  .step-detail[hidden] {
+    display: none;
+  }
+
+  .step-body {
+    margin: 0;
+    max-width: 40ch;
+    color: var(--color-body-brown);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
+    text-wrap: pretty;
+  }
+
+  .progress-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-ink-black);
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .step-item.is-active .progress-bar {
+    opacity: 1;
+    animation: step-progress var(--interval, 5000ms) linear forwards;
+  }
+
+  .showcase[data-in-view='false'] .progress-bar,
+  .showcase:has(:focus-visible) .progress-bar {
+    animation-play-state: paused;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .showcase:hover .progress-bar {
+      animation-play-state: paused;
+    }
+  }
+
+  .stage-canvas {
+    display: grid;
+    place-items: center;
+    padding: var(--card-padding);
+    background: var(--color-stone-surface);
+  }
+
+  .visual {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    min-width: 0;
-    text-align: center;
-  }
-
-  .phase {
-    color: var(--color-body-brown);
-    font-size: var(--text-micro);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--leading-micro);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .node {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2px;
+    gap: 16px;
     width: 100%;
-    max-width: 132px;
-    min-height: 72px;
-    padding: 12px 10px;
-    background: var(--tone);
-    border-radius: var(--radius-cards);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink-black) 12%, transparent);
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 540px;
   }
 
-  .sun {
-    --tone: var(--color-sun-yellow);
+  .slides {
+    display: grid;
+    width: 100%;
   }
 
-  .honey {
-    --tone: var(--color-honey);
-  }
-
-  .sky {
-    --tone: var(--color-sky-blue);
-  }
-
-  .grass {
-    --tone: var(--color-grass-green);
-  }
-
-  .mint {
-    --tone: var(--color-mint);
-  }
-
-  .coral {
-    --tone: var(--color-coral-pink);
-  }
-
-  .verb,
-  .sub,
-  .mark {
-    display: block;
-  }
-
-  .verb,
-  .sub {
-    color: var(--color-ink-black);
-  }
-
-  .verb {
-    font-size: var(--text-caption);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--leading-caption);
-    letter-spacing: var(--tracking-caption);
-  }
-
-  .sub {
-    font-size: var(--text-micro);
-    line-height: var(--leading-micro);
-    letter-spacing: var(--tracking-micro);
-  }
-
-  .mark {
-    padding: 3px 8px;
+  .step-badge {
+    margin: 0;
+    padding: 8px 14px;
     border-radius: var(--radius-pills);
-    background: var(--surface-sand);
-    color: var(--color-body-brown);
-    font-size: var(--text-micro);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-micro);
-    letter-spacing: var(--tracking-micro);
-    box-shadow: inset 0 0 0 1px var(--color-stone-border);
+    background: color-mix(in srgb, var(--color-alt-blue) 8%, var(--surface-pure-white));
+    color: var(--color-alt-blue);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+
+  .slide {
+    grid-area: 1 / 1;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+    pointer-events: none;
+    transition:
+      opacity 360ms var(--ease-out-expo),
+      transform 360ms var(--ease-out-expo);
+  }
+
+  .slide.is-active {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .slide img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .step:hover .node {
-      transform: translateY(-2px);
+    .step-item.is-active .step-body {
+      animation: detail-rise 320ms var(--ease-out-expo) both;
     }
   }
 
-  @media (min-width: 720px) {
-    .diagram {
-      padding: 36px 20px;
+  @media (prefers-reduced-motion: reduce) {
+    .step-item.is-active .progress-bar {
+      animation: none;
+      transform: scaleX(1);
     }
 
-    .steps {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 32px 12px;
+    .slide {
+      transition: none;
+      transform: none;
+    }
+  }
+
+  @keyframes step-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes detail-rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .showcase {
+      grid-template-columns: minmax(260px, 0.4fr) minmax(0, 0.6fr);
+      align-items: stretch;
+    }
+
+    .step-list {
+      justify-content: space-between;
+      border-bottom: 0;
+      border-right: 1px solid var(--color-stone-border);
+    }
+
+    .step-item {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stage-canvas {
+      padding: var(--card-padding);
+      border-bottom-left-radius: 0;
+      border-top-right-radius: var(--radius-cards);
+      border-bottom-right-radius: var(--radius-cards);
     }
   }
 
   @media (min-width: 1024px) {
-    .process {
+    .philosophy {
       padding-block: 104px;
     }
 
-    .diagram {
-      padding: 44px 24px;
+    .showcase {
+      grid-template-columns: minmax(320px, 0.37fr) minmax(0, 0.63fr);
+      margin-top: 48px;
     }
 
-    .track {
-      display: block;
-      position: absolute;
-      top: 111px;
-      left: 8%;
-      right: 8%;
-      height: 1px;
-      background: color-mix(in srgb, var(--color-ink-black) 22%, var(--color-stone-surface));
+    .step-trigger {
+      padding: 24px 28px;
     }
 
-    .steps {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 12px 8px;
+    .step-item.is-active .step-trigger {
+      padding-top: 28px;
+      padding-bottom: 10px;
+    }
+
+    .step-detail {
+      padding: 0 28px 28px;
+    }
+
+    .stage-canvas {
+      padding: var(--card-padding);
     }
   }
 </style>

@@ -1,0 +1,81 @@
+<svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+  <style>
+    .cs-stream {
+      stroke-dasharray: 8 8;
+      animation: csFlow 1.4s linear infinite;
+    }
+    .cs-launch {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: csHover 2.8s ease-in-out infinite;
+    }
+    .cs-wave {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: csWave 2.6s ease-out infinite;
+    }
+    .cs-live-dot {
+      animation: csBlink 1.6s ease-in-out infinite;
+    }
+
+    @keyframes csFlow {
+      to { stroke-dashoffset: -32; }
+    }
+    @keyframes csHover {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes csWave {
+      0% { transform: scale(0.9); opacity: 0.85; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+    @keyframes csBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cs-stream, .cs-launch, .cs-wave, .cs-live-dot { animation: none; }
+    }
+  </style>
+
+  <!-- Left Code / Build Editor Card -->
+  <rect x="24" y="42" width="122" height="116" rx="14" fill="var(--color-ink-black, #292D32)" />
+  <circle cx="40" cy="56" r="3.5" fill="var(--color-alert-red, #ff2b3a)" />
+  <circle cx="51" cy="56" r="3.5" fill="var(--color-honey, #ffbb26)" />
+  <circle cx="62" cy="56" r="3.5" fill="var(--color-mint, #00ca48)" />
+
+  <!-- Colorful Syntax Lines -->
+  <rect x="38" y="72" width="42" height="5" rx="2.5" fill="var(--color-sky-blue, #64c6ff)" />
+  <rect x="86" y="72" width="28" height="5" rx="2.5" fill="var(--color-coral-pink, #ff58ae)" />
+  <rect x="46" y="85" width="64" height="5" rx="2.5" fill="var(--color-sun-yellow, #ffcd6c)" />
+  <rect x="46" y="98" width="50" height="5" rx="2.5" fill="var(--color-plum-violet, #9f4fff)" />
+  <rect x="38" y="111" width="76" height="5" rx="2.5" fill="var(--color-alt-blue, #00b2ff)" />
+
+  <!-- Build Complete Bar -->
+  <rect x="38" y="130" width="94" height="12" rx="6" fill="var(--color-heading-charcoal, #343433)" />
+  <rect x="41" y="133" width="88" height="6" rx="3" fill="var(--color-mint, #00ca48)" />
+
+  <!-- Animated Build-to-Publish Flow Line -->
+  <line x1="146" y1="100" x2="184" y2="100" stroke="var(--color-stone-border, #e5d5c3)" stroke-width="3" />
+  <line class="cs-stream" x1="146" y1="100" x2="184" y2="100" stroke="var(--color-link-blue, #0086fc)" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Right Published Product Card -->
+  <rect x="184" y="32" width="112" height="136" rx="16" fill="#ffffff" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+
+  <!-- Product Banner Header -->
+  <path d="M185 48C185 39.7157 191.716 33 200 33H280C288.284 33 295 39.7157 295 48V78H185V48Z" fill="var(--color-link-blue, #0086fc)" />
+  <circle cx="272" cy="52" r="10" fill="var(--color-sky-blue, #64c6ff)" fill-opacity="0.5" />
+
+  <!-- Radiating Share Wave + Launch Emblem -->
+  <circle class="cs-wave" cx="240" cy="80" r="22" stroke="var(--color-honey, #ffbb26)" stroke-width="2.5" />
+  <g class="cs-launch">
+    <circle cx="240" cy="80" r="21" fill="var(--color-ember-orange, #ff3e00)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+    <path d="M240 70L247 78H242.5V89H237.5V78H233L240 70Z" fill="#ffffff" />
+  </g>
+
+  <!-- Product Title Placeholder & Live Status Pill -->
+  <rect x="206" y="112" width="68" height="6" rx="3" fill="var(--color-heading-charcoal, #343433)" />
+  <rect x="204" y="128" width="72" height="22" rx="11" fill="var(--color-grass-green, #00c978)" stroke="var(--color-ink-black, #292D32)" stroke-width="1.5" />
+  <circle class="cs-live-dot" cx="222" cy="139" r="3.5" fill="#ffffff" />
+  <text x="245" y="142.5" font-family="system-ui, sans-serif" font-weight="700" font-size="10" text-anchor="middle" fill="#ffffff">LIVE</text>
+</svg>

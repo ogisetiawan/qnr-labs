@@ -8,6 +8,7 @@ interface Props {
   projects: LabProject[];
   id?: string;
   title?: string;
+  title2?: string;
   href?: string;
   action?: string;
 }
@@ -15,7 +16,8 @@ interface Props {
 const {
   projects,
   id = 'labs',
-  title = 'Released work, in one place.',
+  title = 'Released work,',
+  title2 = ' in one place.',
   href = '/labs',
   action = 'View projects',
 } = Astro.props;
@@ -33,7 +35,7 @@ const projectTitleId = `${id}-project-title`;
   <Container>
     <div class="section-head">
       <SectionLabel label="Digital Labs" />
-      <h2 id={titleId}>{title}</h2>
+      <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
       <Pill href={href}>{action}</Pill>
     </div>
 

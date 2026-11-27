@@ -140,3 +140,7 @@ body {
   outline: 2px solid var(--color-ember-orange);
   outline-offset: 3px;
 }
+
+.accent {
+  color: var(--color-stone-border);
+}

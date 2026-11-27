@@ -11,6 +11,7 @@ interface Props {
   id?: string;
   eyebrow?: string;
   title?: string;
+  title2?: string;
   lede?: string;
   examples?: Example[];
   disclaimer?: string;
@@ -19,7 +20,8 @@ interface Props {
 const {
   id = 'services',
   eyebrow = 'Services',
-  title = 'Turning your ideas into practical digital solutions.',
+  title = 'Turning your ideas into practical ',
+  title2 = 'digital solutions.',
   lede = 'From early concepts to working products, QNR Labs helps turn ideas and real-world challenges into practical digital solutions through thoughtful development and iterative experimentation.',
   examples = [
     { title: 'Web Development', text: 'Websites and web applications' },
@@ -50,7 +52,7 @@ const titleId = `${id}-title`;
 
       <header class="intro">
         <SectionLabel label={eyebrow} />
-        <h2 id={titleId}>{title}</h2>
+        <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
         <p class="lede">{lede}</p>
       </header>
     </div>

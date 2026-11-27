@@ -11,7 +11,8 @@ interface Spot {
 interface Props {
   id?: string;
   eyebrow?: string;
-  title?: string;
+  title?: string; 
+  title2?: string;
   lede?: string;
   href?: string;
   action?: string;
@@ -31,7 +32,8 @@ const spots: Spot[] = [
 const {
   id = 'open-source',
   eyebrow = 'Open source',
-  title = 'Become a contributor',
+  title = 'Become a ',
+  title2 = 'contributor',
   lede = 'Together, we can turn ambitious goals into remarkable achievements',
   href = '/labs',
   action = 'Email us',
@@ -58,7 +60,7 @@ const titleId = `${id}-title`;
     </ul>
     <div class="copy">
       <SectionLabel label={eyebrow} />
-      <h2 id={titleId}>{title}</h2>
+      <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
       <p class="lede">{lede}</p>
       <Pill href={href}>
         {action}

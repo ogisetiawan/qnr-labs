@@ -13,6 +13,7 @@ interface Props {
   id?: string;
   eyebrow?: string;
   title?: string;
+  title2?: string;
   lede?: string;
   channels?: Channel[];
 }
@@ -20,7 +21,8 @@ interface Props {
 const {
   id = 'contact',
   eyebrow = 'Contact',
-  title = 'Reach out to us',
+  title = 'Reach out ',
+  title2 = 'to us',
   lede = 'Ask QNR to build something or reach out through a public channel. No contact form on this site.',
   channels = [
     { label: 'Email', value: '[TBD]' },
@@ -36,7 +38,7 @@ const titleId = `${id}-title`;
     <div class="layout">
       <div class="copy">
         <SectionLabel label={eyebrow} />
-        <h2 id={titleId}>{title}</h2>
+        <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
         <p class="lede">{lede}</p>
         <ul class="channels" aria-label="Contact channels">
           {
