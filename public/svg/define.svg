@@ -41,18 +41,18 @@
   </style>
 
   <!-- Product Blueprint Window -->
-  <rect x="52" y="22" width="216" height="156" rx="16" fill="#ffffff" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+  <rect x="52" y="22" width="216" height="156" rx="16" fill="var(--surface-pure-white, #ffffff)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
   <line x1="52" y1="50" x2="268" y2="50" stroke="var(--color-stone-border, #e5d5c3)" stroke-width="1.5" />
 
   <!-- Window Controls -->
-  <circle cx="68" cy="36" r="4" fill="var(--color-ember-orange, #ff3e00)" />
-  <circle cx="81" cy="36" r="4" fill="var(--color-honey, #ffbb26)" />
+  <circle cx="68" cy="36" r="4" fill="var(--color-coral-pink, #ff58ae)" />
+  <circle cx="81" cy="36" r="4" fill="var(--color-sun-yellow, #ffcd6c)" />
   <circle cx="94" cy="36" r="4" fill="var(--color-grass-green, #00c978)" />
 
   <!-- v1.0 MVP Pill -->
   <g class="df-badge">
     <rect x="206" y="28" width="48" height="16" rx="8" fill="var(--color-grass-green, #00c978)" />
-    <text x="230" y="39.5" font-family="system-ui, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#ffffff">v1.0</text>
+    <text x="230" y="39.5" font-family="system-ui, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="var(--surface-pure-white, #ffffff)">v1.0</text>
   </g>
 
   <!-- Target Dashed Wireframe Slots -->
@@ -62,24 +62,24 @@
 
   <!-- Snapping Feature Block 1: Core Feature (Ember Orange + Sun Yellow) -->
   <g class="df-block-hero">
-    <rect x="68" y="62" width="110" height="54" rx="10" fill="var(--color-ember-orange, #ff3e00)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+    <rect x="68" y="62" width="110" height="54" rx="10" fill="var(--color-ember-orange, #ff3e00)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
     <rect x="80" y="74" width="44" height="8" rx="4" fill="var(--color-sun-yellow, #ffcd6c)" />
-    <rect x="80" y="88" width="82" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.85" />
-    <rect x="80" y="98" width="60" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.65" />
+    <rect x="80" y="88" width="82" height="5" rx="2.5" fill="var(--surface-pure-white, #ffffff)" fill-opacity="0.85" />
+    <rect x="80" y="98" width="60" height="5" rx="2.5" fill="var(--surface-pure-white, #ffffff)" fill-opacity="0.65" />
   </g>
 
   <!-- Snapping Feature Block 2: Secondary Module (Link Blue + Sky Blue) -->
   <g class="df-block-side">
-    <rect x="188" y="62" width="64" height="54" rx="10" fill="var(--color-link-blue, #0086fc)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+    <rect x="188" y="62" width="64" height="54" rx="10" fill="var(--color-link-blue, #0086fc)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
     <circle cx="220" cy="82" r="9" fill="var(--color-sky-blue, #64c6ff)" />
-    <rect x="202" y="98" width="36" height="6" rx="3" fill="#ffffff" />
+    <rect x="202" y="98" width="36" height="6" rx="3" fill="var(--surface-pure-white, #ffffff)" />
   </g>
 
-  <!-- Snapping Feature Block 3: Foundation Bar (Plum Violet + Coral Pink) -->
+  <!-- Snapping Feature Block 3: Foundation Bar (Mint + Coral Pink) -->
   <g class="df-block-bottom">
-    <rect x="68" y="124" width="184" height="38" rx="10" fill="var(--color-plum-violet, #9f4fff)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+    <rect x="68" y="124" width="184" height="38" rx="10" fill="var(--color-mint, #00ca48)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
     <rect x="80" y="135" width="32" height="16" rx="6" fill="var(--color-coral-pink, #ff58ae)" />
-    <rect x="122" y="140" width="76" height="6" rx="3" fill="#ffffff" />
+    <rect x="122" y="140" width="76" height="6" rx="3" fill="var(--surface-pure-white, #ffffff)" />
     <circle cx="234" cy="143" r="6" fill="var(--color-honey, #ffbb26)" />
   </g>
 </svg>

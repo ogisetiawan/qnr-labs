@@ -46,55 +46,55 @@
   </style>
 
   <!-- Main SMART Matrix Card -->
-  <rect x="26" y="24" width="184" height="152" rx="14" fill="#ffffff" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+  <rect x="26" y="24" width="184" height="152" rx="14" fill="var(--surface-pure-white, #ffffff)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
 
   <!-- SMART Colorful Pills Header -->
   <g font-family="system-ui, sans-serif" font-weight="700" font-size="10" text-anchor="middle">
     <rect x="40" y="36" width="24" height="18" rx="6" fill="var(--color-ember-orange, #ff3e00)" />
-    <text x="52" y="48.5" fill="#ffffff">S</text>
+    <text x="52" y="48.5" fill="var(--surface-pure-white, #ffffff)">S</text>
 
     <rect x="69" y="36" width="24" height="18" rx="6" fill="var(--color-honey, #ffbb26)" />
-    <text x="81" y="48.5" fill="var(--color-ink-black, #292D32)">M</text>
+    <text x="81" y="48.5" fill="var(--color-heading-charcoal, #343433)">M</text>
 
     <rect x="98" y="36" width="24" height="18" rx="6" fill="var(--color-grass-green, #00c978)" />
-    <text x="110" y="48.5" fill="#ffffff">A</text>
+    <text x="110" y="48.5" fill="var(--surface-pure-white, #ffffff)">A</text>
 
     <rect x="127" y="36" width="24" height="18" rx="6" fill="var(--color-link-blue, #0086fc)" />
-    <text x="139" y="48.5" fill="#ffffff">R</text>
+    <text x="139" y="48.5" fill="var(--surface-pure-white, #ffffff)">R</text>
 
-    <rect x="156" y="36" width="24" height="18" rx="6" fill="var(--color-plum-violet, #9f4fff)" />
-    <text x="168" y="48.5" fill="#ffffff">T</text>
+    <rect x="156" y="36" width="24" height="18" rx="6" fill="var(--color-coral-pink, #ff58ae)" />
+    <text x="168" y="48.5" fill="var(--surface-pure-white, #ffffff)">T</text>
   </g>
 
   <!-- Row 1: Feasibility -->
   <circle cx="50" cy="77" r="10" fill="var(--color-mint, #00ca48)" />
-  <path class="tv-check-1" d="M45.5 77L48.5 80L54.5 74" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  <path class="tv-check-1" d="M45.5 77L48.5 80L54.5 74" stroke="var(--surface-pure-white, #ffffff)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
   <rect x="68" y="71" width="84" height="6" rx="3" fill="var(--color-link-blue, #0086fc)" />
   <rect x="68" y="81" width="122" height="4" rx="2" fill="var(--color-stone-border, #e5d5c3)" />
 
   <!-- Row 2: Potential Value -->
   <circle cx="50" cy="111" r="10" fill="var(--color-grass-green, #00c978)" />
-  <path class="tv-check-2" d="M45.5 111L48.5 114L54.5 108" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-  <rect x="68" y="105" width="102" height="6" rx="3" fill="var(--color-plum-violet, #9f4fff)" />
+  <path class="tv-check-2" d="M45.5 111L48.5 114L54.5 108" stroke="var(--surface-pure-white, #ffffff)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="68" y="105" width="102" height="6" rx="3" fill="var(--color-coral-pink, #ff58ae)" />
   <rect x="68" y="115" width="96" height="4" rx="2" fill="var(--color-stone-border, #e5d5c3)" />
 
   <!-- Row 3: Practical Limitations -->
   <circle cx="50" cy="145" r="10" fill="var(--color-honey, #ffbb26)" />
-  <path class="tv-check-3" d="M45.5 145L48.5 148L54.5 142" stroke="var(--color-ink-black, #292D32)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  <path class="tv-check-3" d="M45.5 145L48.5 148L54.5 142" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
   <rect x="68" y="139" width="74" height="6" rx="3" fill="var(--color-ember-orange, #ff3e00)" />
   <rect x="68" y="149" width="114" height="4" rx="2" fill="var(--color-stone-border, #e5d5c3)" />
 
   <!-- Animated Evaluation Scanner Beam -->
-  <rect class="tv-scanner" x="34" y="63" width="168" height="28" rx="8" fill="var(--color-alt-blue, #00b2ff)" fill-opacity="0.14" stroke="var(--color-alt-blue, #00b2ff)" stroke-width="1.5" />
+  <rect class="tv-scanner" x="34" y="63" width="168" height="28" rx="8" fill="var(--color-sky-blue, #64c6ff)" fill-opacity="0.14" stroke="var(--color-sky-blue, #64c6ff)" stroke-width="1.5" />
 
   <!-- Right Feasibility Score Card -->
-  <rect x="220" y="38" width="76" height="124" rx="14" fill="#ffffff" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+  <rect x="220" y="38" width="76" height="124" rx="14" fill="var(--surface-pure-white, #ffffff)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
   <circle cx="258" cy="84" r="20" stroke="var(--color-stone-surface, #f2f0ed)" stroke-width="6" />
   <circle class="tv-gauge" cx="258" cy="84" r="20" stroke="var(--color-grass-green, #00c978)" stroke-width="6" stroke-linecap="round" transform="rotate(-90 258 84)" />
   <circle cx="258" cy="84" r="6" fill="var(--color-coral-pink, #ff58ae)" />
 
   <!-- Score Bars -->
   <rect x="234" y="118" width="48" height="6" rx="3" fill="var(--color-heading-charcoal, #343433)" />
-  <rect x="234" y="132" width="48" height="16" rx="8" fill="var(--color-sun-yellow, #ffcd6c)" stroke="var(--color-gold, #d48f00)" stroke-width="1.5" />
-  <rect x="244" y="138" width="28" height="4" rx="2" fill="var(--color-ink-black, #292D32)" />
+  <rect x="234" y="132" width="48" height="16" rx="8" fill="var(--color-sun-yellow, #ffcd6c)" stroke="var(--color-honey, #ffbb26)" stroke-width="1.5" />
+  <rect x="244" y="138" width="28" height="4" rx="2" fill="var(--color-heading-charcoal, #343433)" />
 </svg>

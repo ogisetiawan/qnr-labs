@@ -51,45 +51,45 @@
   </style>
 
   <!-- Central Capture Notepad -->
-  <rect x="88" y="30" width="144" height="140" rx="14" fill="#ffffff" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+  <rect x="88" y="30" width="144" height="140" rx="14" fill="var(--surface-pure-white, #ffffff)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
   <rect x="104" y="46" width="56" height="8" rx="4" fill="var(--color-heading-charcoal, #343433)" />
-  <circle cx="210" cy="50" r="5" fill="var(--color-alert-red, #ff2b3a)" />
+  <circle cx="210" cy="50" r="5" fill="var(--color-coral-pink, #ff58ae)" />
   <line x1="104" y1="64" x2="216" y2="64" stroke="var(--color-stone-border, #e5d5c3)" stroke-width="1.5" />
 
   <!-- Animated Idea Notes Lines -->
   <line class="nc-line" x1="104" y1="80" x2="192" y2="80" stroke="var(--color-link-blue, #0086fc)" stroke-width="4" stroke-linecap="round" />
-  <line class="nc-line nc-line-2" x1="104" y1="96" x2="210" y2="96" stroke="var(--color-body-brown, #474645)" stroke-width="4" stroke-linecap="round" />
-  <line class="nc-line nc-line-3" x1="104" y1="112" x2="172" y2="112" stroke="var(--color-plum-violet, #9f4fff)" stroke-width="4" stroke-linecap="round" />
+  <line class="nc-line nc-line-2" x1="104" y1="96" x2="210" y2="96" stroke="var(--color-heading-charcoal, #343433)" stroke-width="4" stroke-linecap="round" />
+  <line class="nc-line nc-line-3" x1="104" y1="112" x2="172" y2="112" stroke="var(--color-mint, #00ca48)" stroke-width="4" stroke-linecap="round" />
 
   <!-- Highlight Captured Insight Box -->
-  <rect x="104" y="128" width="112" height="26" rx="8" fill="var(--color-sun-yellow, #ffcd6c)" fill-opacity="0.4" stroke="var(--color-gold, #d48f00)" stroke-width="1.5" />
+  <rect x="104" y="128" width="112" height="26" rx="8" fill="var(--color-sun-yellow, #ffcd6c)" fill-opacity="0.4" stroke="var(--color-honey, #ffbb26)" stroke-width="1.5" />
   <circle cx="118" cy="141" r="5" fill="var(--color-ember-orange, #ff3e00)" />
-  <rect x="130" y="138" width="72" height="6" rx="3" fill="var(--color-ink-black, #292D32)" />
+  <rect x="130" y="138" width="72" height="6" rx="3" fill="var(--color-heading-charcoal, #343433)" />
 
   <!-- Left Sticky Note (Problem / Friction) -->
   <g class="nc-float-1">
-    <rect x="24" y="46" width="52" height="52" rx="12" fill="var(--color-sun-yellow, #ffcd6c)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
+    <rect x="24" y="46" width="52" height="52" rx="12" fill="var(--color-sun-yellow, #ffcd6c)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
     <path d="M50 61V73" stroke="var(--color-ember-orange, #ff3e00)" stroke-width="3.5" stroke-linecap="round" />
     <circle cx="50" cy="81" r="2.5" fill="var(--color-ember-orange, #ff3e00)" />
   </g>
 
   <!-- Bottom-Left Idea Tag -->
   <g class="nc-float-3">
-    <rect x="28" y="114" width="48" height="40" rx="11" fill="var(--color-grass-green, #00c978)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
-    <path d="M52 125L54.5 131.5L61 134L54.5 136.5L52 143L49.5 136.5L43 134L49.5 131.5L52 125Z" fill="#ffffff" />
+    <rect x="28" y="114" width="48" height="40" rx="11" fill="var(--color-grass-green, #00c978)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
+    <path d="M52 125L54.5 131.5L61 134L54.5 136.5L52 143L49.5 136.5L43 134L49.5 131.5L52 125Z" fill="var(--surface-pure-white, #ffffff)" />
   </g>
 
   <!-- Top-Right Lightbulb Spark Card -->
   <circle class="nc-pulse" cx="269" cy="63" r="26" stroke="var(--color-coral-pink, #ff58ae)" stroke-width="2" />
   <g class="nc-float-2">
-    <rect x="242" y="36" width="54" height="54" rx="14" fill="var(--color-coral-pink, #ff58ae)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
-    <path d="M269 49C263.5 49 259 53.5 259 59C259 62.6 260.9 65.7 263.8 67.5V71C263.8 72.1 264.7 73 265.8 73H272.2C273.3 73 274.2 72.1 274.2 71V67.5C277.1 65.7 279 62.6 279 59C279 53.5 274.5 49 269 49Z" fill="var(--color-honey, #ffbb26)" stroke="var(--color-ink-black, #292D32)" stroke-width="1.8" />
-    <line x1="265.5" y1="77" x2="272.5" y2="77" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+    <rect x="242" y="36" width="54" height="54" rx="14" fill="var(--color-coral-pink, #ff58ae)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
+    <path d="M269 49C263.5 49 259 53.5 259 59C259 62.6 260.9 65.7 263.8 67.5V71C263.8 72.1 264.7 73 265.8 73H272.2C273.3 73 274.2 72.1 274.2 71V67.5C277.1 65.7 279 62.6 279 59C279 53.5 274.5 49 269 49Z" fill="var(--color-honey, #ffbb26)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="1.8" />
+    <line x1="265.5" y1="77" x2="272.5" y2="77" stroke="var(--surface-pure-white, #ffffff)" stroke-width="2" stroke-linecap="round" />
   </g>
 
   <!-- Bottom-Right Quick Capture Card -->
   <g class="nc-float-1">
-    <rect x="240" y="108" width="56" height="46" rx="12" fill="var(--color-sky-blue, #64c6ff)" stroke="var(--color-ink-black, #292D32)" stroke-width="2" />
-    <path d="M268 122V140M259 131H277" stroke="var(--color-ink-black, #292D32)" stroke-width="3" stroke-linecap="round" />
+    <rect x="240" y="108" width="56" height="46" rx="12" fill="var(--color-sky-blue, #64c6ff)" stroke="var(--color-heading-charcoal, #343433)" stroke-width="2" />
+    <path d="M268 122V140M259 131H277" stroke="var(--color-heading-charcoal, #343433)" stroke-width="3" stroke-linecap="round" />
   </g>
 </svg>
