@@ -30,15 +30,15 @@ const titleAfter = accentAt === -1 ? '' : title.slice(accentAt + accent.length);
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-copy">
+  <div class="hero-copy section-intro section-intro--center section-intro--hero">
     <SectionLabel label={eyebrow} />
-    <h1 id="hero-title" class="display">
+    <h1 id="hero-title" class="title-heading title-heading--display">
       {titleBefore}
       {accentAt !== -1 && <span class="accent">{accent}</span>}
       {titleAfter}
     </h1>
-    <p class="lede">{lede}</p>
-    <div class="hero-actions">
+    {lede ? <p class="title-subheading">{lede}</p> : null}
+    <div class="section-actions">
       <Pill href={primaryHref}>{primaryLabel}</Pill>
       <Pill href={secondaryHref} variant="sand">{secondaryLabel}</Pill>
     </div>
@@ -87,33 +87,12 @@ const titleAfter = accentAt === -1 ? '' : title.slice(accentAt + accent.length);
     justify-self: start;
   }
 
-  .display {
-    margin: 0;
+  .hero-copy .title-heading--display {
     max-width: 14ch;
-    color: var(--color-ink-black);
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-medium);
-    font-size: var(--text-heading-lg);
-    line-height: var(--leading-heading-lg);
-    letter-spacing: var(--tracking-heading-lg);
-    text-wrap: balance;
   }
 
-  .lede {
+  .hero-copy .title-subheading {
     max-width: 30rem;
-    margin: 20px 0 32px;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-    text-wrap: pretty;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -167,16 +146,5 @@ const titleAfter = accentAt === -1 ? '' : title.slice(accentAt + accent.length);
       margin-right: -24px;
     }
 
-    .display {
-      font-size: var(--text-display);
-      line-height: var(--leading-display);
-      letter-spacing: var(--tracking-display);
-    }
-
-    .lede {
-      font-size: var(--text-subheading);
-      line-height: var(--leading-subheading);
-      letter-spacing: var(--tracking-subheading);
-    }
   }
 </style>

@@ -9,6 +9,7 @@ interface Props {
   id?: string;
   title?: string;
   title2?: string;
+  lede?: string;
   href?: string;
   action?: string;
 }
@@ -18,6 +19,7 @@ const {
   id = 'labs',
   title = 'Released work,',
   title2 = ' in one place.',
+  lede = 'Released projects from QNR Labs. Open the full list to browse every entry.',
   href = '/labs',
   action = 'View projects',
 } = Astro.props;
@@ -33,62 +35,58 @@ const projectTitleId = `${id}-project-title`;
 
 <section id={id} class="section" aria-labelledby={titleId}>
   <Container>
-    <div class="section-head">
+    <header class="section-intro section-intro--center section-intro--spaced">
       <SectionLabel label="Digital Labs" />
-      <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
-      <Pill href={href}>{action}</Pill>
-    </div>
+      <h2 id={titleId} class="title-heading">{title}<span class="accent">{title2}</span></h2>
+      <p class="title-subheading">{lede}</p>
+    </header>
 
     {
       featured ? (
         <div class="feature">
           <div class="preview">
             <img src="/brand/mark.svg" alt="" width="120" height="108" />
-            <p>[TBD] Screenshot</p>
+            <p class="text-content">[TBD] Screenshot</p>
           </div>
 
           <ul class="rows">
             <li>
-              <span class="well">01</span>
               <div>
-                <p class="label">Product description</p>
-                <p class="sub">{featured.summary}</p>
+                <p class="text-caption">Product description</p>
+                <p class="text-content">{featured.summary}</p>
               </div>
             </li>
             <li>
-              <span class="well">02</span>
               <div>
-                <p class="label">The Problem</p>
-                <p class="sub">[TBD — problem story]</p>
+                <p class="text-caption">The Problem</p>
+                <p class="text-content">[TBD — problem story]</p>
               </div>
             </li>
             <li>
-              <span class="well">03</span>
               <div>
-                <p class="label">The Solution</p>
-                <p class="sub">[TBD — solution story]</p>
+                <p class="text-caption">The Solution</p>
+                <p class="text-content">[TBD — solution story]</p>
               </div>
             </li>
             <li class="details">
-              <span class="well">04</span>
               <div>
-                <p class="label">Project details</p>
+                <p class="text-caption">Project details</p>
                 <dl>
                   <div>
                     <dt>Category</dt>
-                    <dd>[TBD]</dd>
+                    <dd class="text-content">[TBD]</dd>
                   </div>
                   <div>
                     <dt>Technology</dt>
-                    <dd>[TBD]</dd>
+                    <dd class="text-content">[TBD]</dd>
                   </div>
                   <div>
                     <dt>License</dt>
-                    <dd>[TBD]</dd>
+                    <dd class="text-content">[TBD]</dd>
                   </div>
                   <div>
                     <dt>Live demo</dt>
-                    <dd>
+                    <dd class="text-content">
                       {
                         isConfirmedUrl(featured.install) ? (
                           <a href={featured.install}>Install</a>
@@ -100,11 +98,11 @@ const projectTitleId = `${id}-project-title`;
                   </div>
                   <div>
                     <dt>GitHub</dt>
-                    <dd>[TBD]</dd>
+                    <dd class="text-content">[TBD]</dd>
                   </div>
                   <div>
                     <dt>Release date</dt>
-                    <dd>{featured.date}</dd>
+                    <dd class="text-content">{featured.date}</dd>
                   </div>
                 </dl>
               </div>
@@ -115,7 +113,7 @@ const projectTitleId = `${id}-project-title`;
               </span>
               <div>
                 <h3 id={projectTitleId}>{featured.title}</h3>
-                <p class="sub">
+                <p class="text-content">
                   {featured.status}
                   {featured.highlight ? ` · ${featured.highlight}` : ''}
                 </p>
@@ -125,6 +123,10 @@ const projectTitleId = `${id}-project-title`;
         </div>
       ) : null
     }
+
+    <div class="section-actions section-actions--block">
+      <Pill href={href}>{action}</Pill>
+    </div>
   </Container>
 </section>
 
@@ -134,21 +136,14 @@ const projectTitleId = `${id}-project-title`;
     scroll-margin-top: 104px;
   }
 
-  .section-head {
+  .section-intro {
     max-width: 28rem;
     margin-inline: auto;
-    margin-bottom: 40px;
-    text-align: center;
   }
 
-  h2 {
-    margin: 0 0 28px;
-    color: var(--color-ink-black);
-    font-size: var(--text-heading-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading-lg);
-    letter-spacing: var(--tracking-heading-lg);
-    text-wrap: balance;
+  .section-actions--block {
+    justify-content: center;
+    margin-top: 40px;
   }
 
   .feature {
@@ -172,11 +167,10 @@ const projectTitleId = `${id}-project-title`;
     height: auto;
   }
 
-  .preview p {
-    margin: 0;
-    color: var(--color-body-brown);
+  .preview .text-content {
     font-size: var(--text-caption);
     line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
   }
 
   .rows {
@@ -189,7 +183,7 @@ const projectTitleId = `${id}-project-title`;
 
   .rows li {
     display: grid;
-    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
     align-items: center;
     margin: 0;
@@ -218,44 +212,59 @@ const projectTitleId = `${id}-project-title`;
 
   .label,
   h3,
-  .sub {
+  .text-content {
     margin: 0;
   }
 
-  .label,
-  h3 {
-    color: var(--color-ink-black);
+  .label + .text-content,
+  .rows li.selected h3 + .text-content {
+    margin-top: 8px;
+  }
+
+  .label {
+    color: var(--color-gold);
     font-size: var(--text-body);
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-body);
     letter-spacing: var(--tracking-body);
   }
 
-  .sub {
-    color: var(--color-body-brown);
+  .details .text-content {
     font-size: var(--text-caption);
     line-height: var(--leading-caption);
     letter-spacing: var(--tracking-caption);
   }
 
-  .selected {
+  .rows li.selected {
+    grid-template-columns: 40px minmax(0, 1fr);
     align-items: center;
-    background: var(--surface-dark-surface);
+    background: var(--color-heading-charcoal);
+    color: var(--surface-canvas);
     box-shadow: none;
   }
 
-  .selected .well {
+  .rows li.selected .well {
     background: var(--surface-pure-white);
   }
 
-  .selected .well img {
+  .rows li.selected .well img {
     width: 22px;
     height: auto;
   }
 
-  .selected h3,
-  .selected .sub {
-    color: var(--color-cream-canvas);
+  .rows li.selected h3 {
+    color: inherit;
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-body);
+    letter-spacing: var(--tracking-body);
+  }
+
+  .rows li.selected .text-content {
+    color: color-mix(in srgb, var(--color-cream-canvas) 82%, var(--color-muted-gray));
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    letter-spacing: var(--tracking-caption);
   }
 
   dl {
@@ -273,17 +282,13 @@ const projectTitleId = `${id}-project-title`;
   dt,
   dd {
     margin: 0;
-    font-size: var(--text-caption);
-    line-height: var(--leading-caption);
   }
 
   dt {
     color: var(--color-ink-black);
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
     font-weight: var(--font-weight-medium);
-  }
-
-  dd {
-    color: var(--color-body-brown);
   }
 
   dd a {
@@ -295,8 +300,8 @@ const projectTitleId = `${id}-project-title`;
       padding-block: 104px;
     }
 
-    .section-head {
-      margin-bottom: 48px;
+    .section-actions--block {
+      margin-top: 48px;
     }
 
     .feature {

@@ -10,31 +10,3 @@ const { label } = Astro.props;
   <span class="dot" aria-hidden="true"></span>
   {label}
 </p>
-
-<style>
-  .section-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    width: fit-content;
-    max-width: 100%;
-    margin: 0 0 16px;
-    padding: 8px 14px;
-    border-radius: var(--radius-pills);
-    background: color-mix(in srgb, var(--color-ember-orange) 8%, var(--surface-pure-white));
-    color: var(--color-ember-orange);
-    font-size: 12px;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.2;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .dot {
-    flex: 0 0 auto;
-    width: 8px;
-    height: 8px;
-    border-radius: var(--radius-pills);
-    background: var(--color-ember-orange);
-  }
-</style>

@@ -37,9 +37,11 @@ const titleId = `${id}-title`;
   <Container>
     <div class="layout">
       <div class="copy">
-        <SectionLabel label={eyebrow} />
-        <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
-        <p class="lede">{lede}</p>
+        <header class="section-intro">
+          <SectionLabel label={eyebrow} />
+          <h2 id={titleId} class="title-heading">{title}<span class="accent">{title2}</span></h2>
+          <p class="title-subheading">{lede}</p>
+        </header>
         <ul class="channels" aria-label="Contact channels">
           {
             channels.map((channel) => (
@@ -82,28 +84,12 @@ const titleId = `${id}-title`;
     align-items: center;
   }
 
-  h2 {
-    margin: 0;
-    color: var(--color-ink-black);
-    font-size: var(--text-heading-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading-lg);
-    letter-spacing: var(--tracking-heading-lg);
-    text-wrap: balance;
-  }
-
-  .lede {
-    margin: 20px 0 0;
+  .section-intro .title-subheading {
     max-width: 36ch;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-    text-wrap: pretty;
   }
 
   .channels {
-    margin: 28px 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
   }

@@ -70,10 +70,10 @@ const titleId = `${id}-title`;
 
 <section id={id} class="philosophy" aria-labelledby={titleId}>
   <Container>
-    <header class="intro">
+    <header class="section-intro section-intro--spaced">
       <SectionLabel label={eyebrow} />
-      <h2 id={titleId}>{title} <span class="accent">{title2}</span></h2>
-      <p class="lede">{lede}</p>
+      <h2 id={titleId} class="title-heading">{title} <span class="accent">{title2}</span></h2>
+      <p class="title-subheading">{lede}</p>
     </header>
 
     <div
@@ -88,16 +88,17 @@ const titleId = `${id}-title`;
             const isFirst = index === 0;
             return (
               <li class:list={['step-item', isFirst && 'is-active']} data-step-item>
+                <span class="step-index" aria-hidden="true">{stage.mark}.</span>
                 <button
                   type="button"
                   class="step-trigger"
                   aria-current={isFirst ? 'step' : undefined}
                   data-step-trigger={index}
                 >
-                  <span class="step-title">{stage.title}</span>
+                  <span class="text-caption">{stage.title}</span>
                 </button>
                 <div class="step-detail" hidden={!isFirst} data-step-detail>
-                  <p class="step-body">{stage.description}</p>
+                  <p class="text-content">{stage.description}</p>
                 </div>
                 <span class="progress-bar" data-progress-bar aria-hidden="true"></span>
               </li>
@@ -132,9 +133,9 @@ const titleId = `${id}-title`;
               })
             }
           </div>
-          <p class="step-badge" data-step-badge aria-live="polite">
+          <!-- <p class="step-badge" data-step-badge aria-live="polite">
             Step {stages[0]?.mark ?? '01'}
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
@@ -250,34 +251,14 @@ const titleId = `${id}-title`;
     scroll-margin-top: 104px;
   }
 
-  .intro {
+  .section-intro {
     max-width: 36rem;
-  }
-
-  h2 {
-    margin: 0;
-    color: var(--color-ink-black);
-    font-family: var(--font-family);
-    font-size: var(--text-heading-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading-lg);
-    letter-spacing: var(--tracking-heading-lg);
-    text-wrap: balance;
-  }
-
-  .lede {
-    margin: 16px 0 0;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-    text-wrap: pretty;
   }
 
   .showcase {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    margin-top: 40px;
+    margin-top: 0;
     overflow: hidden;
     background: var(--surface-pure-white);
     border-radius: var(--radius-cards);
@@ -296,6 +277,8 @@ const titleId = `${id}-title`;
   .step-item {
     position: relative;
     margin: 0;
+    overflow: hidden;
+    /* container-type: inline-size; */
   }
 
   .step-item + .step-item {
@@ -303,6 +286,8 @@ const titleId = `${id}-title`;
   }
 
   .step-trigger {
+    position: relative;
+    z-index: 1;
     display: block;
     width: 100%;
     padding: 20px 22px;
@@ -314,25 +299,19 @@ const titleId = `${id}-title`;
     transition: opacity 180ms var(--ease-out-expo);
   }
 
-  .step-title {
-    color: var(--color-alt-blue);
-    font-size: var(--text-subheading);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-subheading);
-    letter-spacing: var(--tracking-subheading);
-  }
-
   .step-item.is-active .step-trigger {
     padding-bottom: 8px;
   }
 
-  .step-item.is-active .step-title {
+  .step-item.is-active .text-caption {
     font-size: var(--text-heading);
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
   }
 
   .step-detail {
+    position: relative;
+    z-index: 1;
     padding: 0 22px 24px;
   }
 
@@ -340,14 +319,41 @@ const titleId = `${id}-title`;
     display: none;
   }
 
-  .step-body {
+  .step-index {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    z-index: 0;
     margin: 0;
+    padding-right: 10px;
+    color: color-mix(in srgb, var(--color-stone-border) 50%, var(--surface-pure-white));
+    font-family: var(--font-family);
+    font-size: clamp(2.5rem, 42cqw, 4.25rem);
+    font-weight: var(--font-weight-medium);
+    line-height: 0.85;
+    letter-spacing: var(--tracking-heading-lg);
+    text-align: right;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    transform: translate(14%, -50%);
+    transition:
+      opacity 280ms var(--ease-out-expo),
+      transform 280ms var(--ease-out-expo);
+  }
+
+  .step-item.is-active .step-index {
+    opacity: 1;
+    transform: translate(10%, -50%);
+  }
+
+  .step-detail .text-content {
+    position: relative;
+    z-index: 1;
     max-width: 40ch;
-    color: var(--color-body-brown);
-    font-size: var(--text-caption);
-    line-height: var(--leading-caption);
-    letter-spacing: var(--tracking-caption);
-    text-wrap: pretty;
   }
 
   .progress-bar {
@@ -436,7 +442,7 @@ const titleId = `${id}-title`;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .step-item.is-active .step-body {
+    .step-item.is-active {
       animation: detail-rise 320ms var(--ease-out-expo) both;
     }
   }
@@ -490,6 +496,7 @@ const titleId = `${id}-title`;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      /* container-type: size; */
     }
 
     .stage-canvas {
@@ -507,7 +514,6 @@ const titleId = `${id}-title`;
 
     .showcase {
       grid-template-columns: minmax(320px, 0.37fr) minmax(0, 0.63fr);
-      margin-top: 48px;
     }
 
     .step-trigger {
@@ -521,6 +527,15 @@ const titleId = `${id}-title`;
 
     .step-detail {
       padding: 0 28px 28px;
+    }
+
+    .step-index {
+      padding-right: 14px;
+      font-size: clamp(2.75rem, min(36cqh, 44cqw), 5.5rem);
+    }
+
+    .step-item.is-active .step-index {
+      transform: translate(8%, -50%);
     }
 
     .stage-canvas {

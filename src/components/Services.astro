@@ -13,7 +13,7 @@ interface Props {
   title?: string;
   title2?: string;
   lede?: string;
-  examples?: Example[];
+  services?: Example[];
   disclaimer?: string;
 }
 
@@ -23,7 +23,7 @@ const {
   title = 'Turning your ideas into practical ',
   title2 = 'digital solutions.',
   lede = 'From early concepts to working products, QNR Labs helps turn ideas and real-world challenges into practical digital solutions through thoughtful development and iterative experimentation.',
-  examples = [
+  services = [
     { title: 'Web Development', text: 'Websites and web applications' },
     { title: 'Digital Product Development', text: 'Turning ideas into usable products' },
     { title: 'Custom Software', text: 'Software tailored to specific needs' },
@@ -38,22 +38,22 @@ const titleId = `${id}-title`;
   <Container>
     <div class="layout">
       <div class="list-panel">
-        <ol class="examples" aria-label="Example service categories">
+        <ol class="services" aria-label="Example service categories">
           {
-            examples.map((example) => (
+            services.map((example) => (
               <li>
-                <h3>{example.title}</h3>
-                <p>{example.text}</p>
+                <h3 class="text-caption">{example.title}</h3>
+                <p class="text-content">{example.text}</p>
               </li>
             ))
           }
         </ol>
       </div>
 
-      <header class="intro">
+      <header class="section-intro">
         <SectionLabel label={eyebrow} />
-        <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
-        <p class="lede">{lede}</p>
+        <h2 id={titleId} class="title-heading">{title}<span class="accent">{title2}</span></h2>
+        <p class="title-subheading">{lede}</p>
       </header>
     </div>
   </Container>
@@ -70,28 +70,12 @@ const titleId = `${id}-title`;
     gap: 32px;
   }
 
-  .intro {
+  .section-intro {
     max-width: 38rem;
   }
 
-  h2 {
-    margin: 0;
+  .section-intro .title-heading {
     max-width: 18ch;
-    color: var(--color-ink-black);
-    font-size: var(--text-heading-lg);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--leading-heading-lg);
-    letter-spacing: var(--tracking-heading-lg);
-    text-wrap: balance;
-  }
-
-  .lede {
-    margin: 20px 0 0;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-    text-wrap: pretty;
   }
 
   .list-panel {
@@ -101,36 +85,32 @@ const titleId = `${id}-title`;
     box-shadow: var(--shadow-subtle);
   }
 
-  .examples {
+  .services {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .examples li {
+  .services li {
     padding-block: 20px;
   }
 
-  .examples li + li {
+  .services li + li {
     box-shadow: inset 0 1px 0 var(--color-stone-border);
   }
 
-  h3 {
+  .example-title {
     margin: 0;
-    color: var(--color-ink-black);
+    color: var(--color-grass-green);
     font-size: var(--text-heading);
     font-weight: var(--font-weight-medium);
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
   }
 
-  .examples p {
-    margin: 8px 0 0;
+  .services .text-content {
+    margin-top: 8px;
     max-width: 46ch;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
   }
 
   .disclaimer {
@@ -159,7 +139,7 @@ const titleId = `${id}-title`;
       grid-row: 1;
     }
 
-    .intro {
+    .section-intro {
       grid-column: 2;
       grid-row: 1;
     }

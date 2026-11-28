@@ -59,13 +59,17 @@ const titleId = `${id}-title`;
       }
     </ul>
     <div class="copy">
-      <SectionLabel label={eyebrow} />
-      <h2 id={titleId}>{title}<span class="accent">{title2}</span></h2>
-      <p class="lede">{lede}</p>
-      <Pill href={href}>
-        {action}
-        <span class="arrow" aria-hidden="true">→</span>
-      </Pill>
+      <header class="section-intro section-intro--center">
+        <SectionLabel label={eyebrow} />
+        <h2 id={titleId} class="title-heading">{title}<span class="accent">{title2}</span></h2>
+        <p class="title-subheading">{lede}</p>
+        <div class="section-actions">
+          <Pill href={href}>
+            {action}
+            <span class="arrow" aria-hidden="true">→</span>
+          </Pill>
+        </div>
+      </header>
     </div>
   </div>
 </section>
@@ -147,25 +151,6 @@ const titleId = `${id}-title`;
     text-align: center;
   }
 
-  h2 {
-    margin: 0;
-    color: var(--color-ink-black);
-    font-size: var(--text-heading);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--leading-heading);
-    letter-spacing: var(--tracking-heading);
-    text-wrap: balance;
-  }
-
-  .lede {
-    margin: 16px 0 24px;
-    color: var(--color-body-brown);
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    letter-spacing: var(--tracking-body);
-    text-wrap: pretty;
-  }
-
   .arrow {
     margin-left: 8px;
   }
@@ -176,12 +161,6 @@ const titleId = `${id}-title`;
       height: 56px;
     }
 
-    h2 {
-      font-size: var(--text-heading-lg);
-      font-weight: var(--font-weight-medium);
-      line-height: var(--leading-heading-lg);
-      letter-spacing: var(--tracking-heading-lg);
-    }
   }
 
 </style>
